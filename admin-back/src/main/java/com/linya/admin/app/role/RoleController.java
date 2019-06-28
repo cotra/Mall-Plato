@@ -1,4 +1,4 @@
-package com.linya.admin.modules.role;
+package com.linya.admin.app.role;
 
 import com.linya.admin.api.Api;
 import com.linya.admin.api.ApiMaker;

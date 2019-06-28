@@ -1,4 +1,4 @@
-package com.linya.admin.modules.role.dao;
+package com.linya.admin.app.role.dao;
 
 import com.linya.admin.po.UmsRole;
 import org.apache.ibatis.annotations.Select;
