@@ -1,19 +1,24 @@
 package com.linya.admin.po;
 
-import org.apache.ibatis.type.Alias;
-
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
-@Alias("Role")
-public class Role implements Serializable {
-    private Long id; // id
+public class UmsRole implements Serializable {
+    private Long id;
+
     private String name;
+
     private String description;
+
     private Integer adminCount;
-    private Timestamp createTime;
+
+    private Date createTime;
+
     private Integer status;
+
     private Integer sort;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
@@ -47,11 +52,11 @@ public class Role implements Serializable {
         this.adminCount = adminCount;
     }
 
-    public Timestamp getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -69,5 +74,23 @@ public class Role implements Serializable {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", description=").append(description);
+        sb.append(", adminCount=").append(adminCount);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", status=").append(status);
+        sb.append(", sort=").append(sort);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
