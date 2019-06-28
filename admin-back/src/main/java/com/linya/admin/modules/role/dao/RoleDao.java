@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface RoleDao {
+
+    @Select("select * from ums_role")
     List<UmsRole> getList();
 
     @Select("select * from ums_role where name = #{name}")

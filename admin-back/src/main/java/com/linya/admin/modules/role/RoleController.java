@@ -16,9 +16,6 @@ public class RoleController {
     @Autowired
     RoleService service;
 
-    /**
-     * 注册登录账户名不能为纯数字,不能有@等特殊字符,只能是字母或字母+数字
-     */
     @GetMapping("list")
     public Api<List<UmsRole>> list() {
         List<UmsRole> list = service.getList();
