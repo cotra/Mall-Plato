@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linya.admin.modules.role.RoleDao">
+    <!-- result map -->
+    <resultMap id="ResultMap" type="com.linya.admin.po.Role">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <id column="description" property="description" jdbcType="VARCHAR"/>
+        <id column="admin_count" property="adminCount" jdbcType="INTEGER"/>
+        <id column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <id column="status" property="status" jdbcType="INTEGER"/>
+        <id column="sort" property="sort" jdbcType="INTEGER"/>
+    </resultMap>
+    <!-- cell -->
+    <sql id="cell">
+        id, name, description, admin_count, create_time, status, sort
+    </sql>
+    <!-- table -->
+    <sql id="table">ums_role</sql>
+    <!--findByUsernameAndMobile-->
+    <select id="getList" resultMap="ResultMap">
+        SELECT <include refid="cell"/>
+        FROM <include refid="table"/>
+    </select>
+</mapper>
