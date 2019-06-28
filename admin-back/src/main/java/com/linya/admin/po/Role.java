@@ -5,6 +5,7 @@ import org.apache.ibatis.type.Alias;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+@Alias("Role")
 public class Role implements Serializable {
     private Long id; // id
     private String name;

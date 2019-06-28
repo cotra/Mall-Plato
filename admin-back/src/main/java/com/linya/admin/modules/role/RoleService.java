@@ -1,5 +1,6 @@
 package com.linya.admin.modules.role;
 
+import com.linya.admin.modules.role.dao.RoleDao;
 import com.linya.admin.po.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,13 @@ import java.util.List;
 public class RoleService {
 
     @Autowired
-    private RoleDao roleDao;
+    private RoleDao dao;
 
-    // 注册
     public List<Role> getList() {
-        return roleDao.getList();
+        return dao.getList();
+    }
+
+    public Role find() {
+        return dao.find("商品管理员");
     }
 }
