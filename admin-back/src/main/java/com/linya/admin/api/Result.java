@@ -3,7 +3,7 @@ package com.linya.admin.api;
 /**
  * Created by Administrator on 2018/3/23.
  */
-public class ApiMaker {
+public class Result {
 
     // 生成方法
     public static final <T> Api<T> create(String code, String msg, T data) {

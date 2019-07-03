@@ -13,8 +13,9 @@ public class AdminApplication implements CommandLineRunner {
         SpringApplication.run(AdminApplication.class, args);
     }
 
+
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("服务启动完成");
+        System.out.println("服务启动成功");
     }
 }

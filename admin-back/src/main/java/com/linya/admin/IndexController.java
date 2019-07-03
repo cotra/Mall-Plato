@@ -1,7 +1,7 @@
 package com.linya.admin;
 
 import com.linya.admin.api.Api;
-import com.linya.admin.api.ApiMaker;
+import com.linya.admin.api.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +10,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public Api<String> index() {
-        return ApiMaker.ok("mall-prototype admin-back api service is running.");
+        return Result.ok("mall-prototype admin-back api service is running.");
     }
 }
