@@ -5,9 +5,9 @@ package com.linya.admin.api;
  */
 public enum Code {
     // 成功
-    SUCCESS("0000", "操作成功"),
+    SUCCESS("1000", "操作成功"),
     // 失败
-    FAILURE("1000", "操作失败");
+    FAILURE("2000", "操作失败");
 
     private final String code;
     private final String msg;

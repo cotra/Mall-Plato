@@ -17,7 +17,7 @@ public class RoleService {
         return dao.getList();
     }
 
-    public UmsRole find() {
-        return dao.find("商品管理员");
+    public UmsRole find(String name) {
+        return dao.find(name);
     }
 }
