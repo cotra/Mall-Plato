@@ -3,7 +3,7 @@ package com.linya.admin.app.role;
 import com.linya.admin.api.Api;
 import com.linya.admin.api.Result;
 import com.linya.admin.po.UmsRole;
-import com.linya.admin.route.RouteConfig;
+import com.linya.admin.config.ApiUrlConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = RouteConfig.API_ROLE)
+@RequestMapping(value = ApiUrlConfig.ROLE)
 public class RoleController {
     @Autowired
     RoleService service;

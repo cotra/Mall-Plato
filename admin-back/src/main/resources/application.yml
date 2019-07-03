@@ -1,10 +1,10 @@
-# server
+# Server
 server:
   port: 8080
   server:
     tomcat:
       uri-encoding: utf-8
-# spring
+# Spring
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -18,8 +18,13 @@ spring:
     host: 127.0.0.1
     port: 6379
     password:
-# mybatis
+# MyBatis
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.linya.admin.po
+# Shiro
+shiro:
+  web:
+    enabled: true
+
 
