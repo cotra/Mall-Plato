@@ -1,4 +1,4 @@
-package com.linya.admin.core.shiro;
+package com.linya.admin.modules.shiro;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -39,10 +39,9 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String guestName = (String)token.getPrincipal();  //得到用户名
+        String guestPwd = new String((char[])token.getCredentials()); //得到密码
 
-        String username = (String)token.getPrincipal();  //得到用户名
-        String password = new String((char[])token.getCredentials()); //得到密码
-
-        return new SimpleAuthenticationInfo(username, password, getName());
+        return new SimpleAuthenticationInfo(guestName, guestPwd, getName());
     }
 }

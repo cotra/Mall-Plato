@@ -1,7 +1,7 @@
-package com.linya.admin.app.auth;
+package com.linya.admin.web.auth;
 
-import com.linya.admin.api.Api;
-import com.linya.admin.api.Result;
+import com.linya.admin.web.api.Api;
+import com.linya.admin.web.api.Result;
 import com.linya.admin.config.ApiUrlConfig;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

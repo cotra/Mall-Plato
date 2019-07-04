@@ -1,4 +1,4 @@
-package com.linya.admin.api;
+package com.linya.admin.web.api;
 
 import java.io.Serializable;
 

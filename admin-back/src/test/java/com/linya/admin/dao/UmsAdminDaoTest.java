@@ -1,6 +1,6 @@
-package com.linya.admin.modules.dao;
+package com.linya.admin.dao;
 
-import com.linya.admin.po.UmsRole;
+import com.linya.admin.dto.UmsAdminAuth;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +18,7 @@ public class UmsAdminDaoTest {
 
     @Test
     public void getList() {
-        List<UmsRole> list = dao.getList();
-        System.out.println(list.size());
+        List<UmsAdminAuth> list = dao.getList("admin");
+        System.out.println(list.get(0).toString());
     }
 }

@@ -1,4 +1,4 @@
-package com.linya.admin.modules.service;
+package com.linya.admin.service;
 
 import org.springframework.stereotype.Service;
 

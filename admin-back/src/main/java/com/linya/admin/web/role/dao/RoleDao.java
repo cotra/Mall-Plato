@@ -1,11 +1,15 @@
-package com.linya.admin.modules.dao;
+package com.linya.admin.web.role.dao;
 
 import com.linya.admin.po.UmsRole;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-public interface UmsAdminDao {
+public interface RoleDao {
+
     @Select("select * from ums_role")
     List<UmsRole> getList();
+
+    @Select("select * from ums_role where name = #{name}")
+    UmsRole find(String name);
 }
