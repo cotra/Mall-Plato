@@ -14,26 +14,16 @@ public class ShiroConfig {
     public Realm realm() {
         System.out.println("realm");
         TextConfigurationRealm realm = new TextConfigurationRealm();
-        //添加两个用户
-        //joe.coder=password 角色 user
-        //jill.coder=password 角色 admin
-        realm.setUserDefinitions("joe.coder=password,user\n" +
-                "jill.coder=password,admin");
-
-        //设置角色admin的权限是read,write
-        //设置角色user的权限是read
-        realm.setRoleDefinitions("admin=read,write\n" +
-                "user=read");
-        realm.setCachingEnabled(true);
-
         return realm;
     }
 
+    /**
+     * 授权控制配置
+     */
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        System.out.println("shiroFilterChainDefinition");
-        chainDefinition.addPathDefinition("/api/**", "authc, roles[admin]");
+        chainDefinition.addPathDefinition(ApiUrlConfig.ROLE + "**", "roles[admin]");
         return chainDefinition;
     }
 }
