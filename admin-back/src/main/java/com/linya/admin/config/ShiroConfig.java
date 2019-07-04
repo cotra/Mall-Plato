@@ -1,9 +1,9 @@
 package com.linya.admin.config;
 
-import org.apache.shiro.realm.Realm;
-import org.apache.shiro.realm.text.TextConfigurationRealm;
+import com.linya.admin.core.shiro.ShiroRealm;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,10 +11,16 @@ import org.springframework.context.annotation.Configuration;
 public class ShiroConfig {
 
     @Bean
-    public Realm realm() {
-        System.out.println("realm");
-        TextConfigurationRealm realm = new TextConfigurationRealm();
+    public ShiroRealm realm() {
+        ShiroRealm realm = new ShiroRealm();
         return realm;
+    }
+
+    @Bean
+    public DefaultWebSecurityManager securityManager() {
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+        manager.setRealm(realm());
+        return manager;
     }
 
     /**
@@ -22,8 +28,8 @@ public class ShiroConfig {
      */
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-        DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        chainDefinition.addPathDefinition(ApiUrlConfig.ROLE + "**", "roles[admin]");
-        return chainDefinition;
+        DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
+        definition.addPathDefinition(ApiUrlConfig.ROLE + "**", "authc");
+        return definition;
     }
 }

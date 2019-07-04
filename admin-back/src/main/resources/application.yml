@@ -24,7 +24,10 @@ mybatis:
   type-aliases-package: com.linya.admin.po
 # Shiro
 shiro:
+  loginUrl: /api/auth/please
   web:
     enabled: true
+  sessionManager:
+    sessionIdUrlRewritingEnabled: true
 
 
