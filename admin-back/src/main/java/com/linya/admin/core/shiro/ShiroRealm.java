@@ -17,7 +17,7 @@ public class ShiroRealm extends AuthorizingRealm {
     }
 
     /**
-     * 支持类型,支持UsernamePasswordToken类型的Token
+     * 支持类型,现在支持UsernamePasswordToken类型的Token
      */
     @Override
     public boolean supports(AuthenticationToken token) {
