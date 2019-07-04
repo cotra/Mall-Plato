@@ -1,4 +1,4 @@
-package com.linya.admin.web.api;
+package com.linya.admin.modules.api;
 
 /**
  * Created by Administrator on 2018/3/23.
@@ -7,10 +7,7 @@ public class Result {
 
     // 生成方法
     public static final <T> Api<T> create(String code, String msg, T data) {
-        Api<T> api = new Api<>();
-        api.setCode(code);
-        api.setMsg(msg);
-        api.setData(data);
+        Api<T> api = new Api<>(code, msg, data);
         return api;
     }
 

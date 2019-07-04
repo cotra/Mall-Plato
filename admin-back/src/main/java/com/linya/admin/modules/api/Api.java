@@ -1,4 +1,4 @@
-package com.linya.admin.web.api;
+package com.linya.admin.modules.api;
 
 import java.io.Serializable;
 
@@ -10,6 +10,15 @@ public class Api<T> implements Serializable {
     private String code;
     private String msg;
     private T data;
+
+    public Api() {
+    }
+
+    public Api(String code, String msg, T data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
 
     public String getCode() {
         return code;

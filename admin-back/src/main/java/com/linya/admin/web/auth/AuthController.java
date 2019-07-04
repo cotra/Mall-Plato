@@ -1,12 +1,10 @@
 package com.linya.admin.web.auth;
 
-import com.linya.admin.web.api.Api;
-import com.linya.admin.web.api.Result;
+import com.linya.admin.modules.api.Api;
+import com.linya.admin.modules.api.Result;
 import com.linya.admin.config.ApiUrlConfig;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import com.linya.admin.modules.cstp.Cstp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,17 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = ApiUrlConfig.AUTH)
 public class AuthController {
 
+    @Autowired
+    AuthService service;
+
     @GetMapping("login")
     public Api<String> login() {
-        Subject subject = SecurityUtils.getSubject();
-        try {
-            subject.login(new UsernamePasswordToken("user123", "1234526"));
+        Cstp<String> cstp = service.signIn();
+        if(cstp.isOk()) {
             return Result.ok("登录成功");
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-            return Result.fail("登录失败");
+        } else {
+            return Result.ok("登录失败");
         }
+    }
 
+    public Api<String> logout() {
+        return Result.ok("登录已经注销");
     }
 
     @GetMapping("please")

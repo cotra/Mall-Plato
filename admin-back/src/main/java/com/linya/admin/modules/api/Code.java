@@ -1,4 +1,4 @@
-package com.linya.admin.web.api;
+package com.linya.admin.modules.api;
 
 /**
  * Created by Administrator on 2018/3/23.

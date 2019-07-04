@@ -1,12 +1,19 @@
 package com.linya.admin.modules.shiro;
 
+import com.linya.admin.dto.UmsAdminAuth;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class ShiroRealm extends AuthorizingRealm {
+
+    @Autowired
+    ShiroRealmService service;
 
     /**
      * 重写realm名称
@@ -41,7 +48,11 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String guestName = (String)token.getPrincipal();  //得到用户名
         String guestPwd = new String((char[])token.getCredentials()); //得到密码
+        List<UmsAdminAuth> list = service.getAdmin(guestName);
+        if(list.size() == 0) {
+            throw new UnknownAccountException("账户或密码错误");
+        }
 
-        return new SimpleAuthenticationInfo(guestName, guestPwd, getName());
+        return new SimpleAuthenticationInfo(guestName, "123", getName());
     }
 }

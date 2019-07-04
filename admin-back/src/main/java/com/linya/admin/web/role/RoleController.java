@@ -1,7 +1,7 @@
 package com.linya.admin.web.role;
 
-import com.linya.admin.web.api.Api;
-import com.linya.admin.web.api.Result;
+import com.linya.admin.modules.api.Api;
+import com.linya.admin.modules.api.Result;
 import com.linya.admin.po.UmsRole;
 import com.linya.admin.config.ApiUrlConfig;
 import org.springframework.beans.factory.annotation.Autowired;
