@@ -10,16 +10,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShiroConfig {
 
+    /**
+     * 自定义realm
+     */
     @Bean
-    public ShiroRealm realm() {
-        ShiroRealm realm = new ShiroRealm();
-        return realm;
+    public ShiroRealm shiroRealm() {
+        return new ShiroRealm();
     }
 
+    /**
+     * 授权管理器
+     */
     @Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(realm());
+        manager.setRealm(shiroRealm());
         return manager;
     }
 

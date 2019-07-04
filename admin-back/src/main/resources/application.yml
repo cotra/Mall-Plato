@@ -25,9 +25,11 @@ mybatis:
 # Shiro
 shiro:
   loginUrl: /api/auth/please
+  unauthorizedUrl: /api/auth/unauthorized
   web:
     enabled: true
   sessionManager:
+    sessionIdCookieEnabled: true
     sessionIdUrlRewritingEnabled: true
 
 

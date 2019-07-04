@@ -10,19 +10,33 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
+
     /**
-     * 登录业务
+     * 登录
      */
-    public Cstp<String> signIn() {
+    public Cstp<String> login(String username, String password) {
         Subject subject = SecurityUtils.getSubject();
+        // 密码处理
         try {
-            subject.login(new UsernamePasswordToken("user123", "1234526"));
+            subject.login(new UsernamePasswordToken(username, password));
             return Sender.ok();
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
             return Sender.fail();
         }
+    }
 
+    /**
+     * 注销
+     */
+    public Cstp<String> logout() {
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.logout();
+            return Sender.ok();
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return Sender.fail();
+        }
     }
 }

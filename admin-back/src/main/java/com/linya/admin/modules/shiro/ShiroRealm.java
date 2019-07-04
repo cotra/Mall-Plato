@@ -43,16 +43,20 @@ public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 认证
+     * principals：身份 / credentials：证明
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String guestName = (String)token.getPrincipal();  //得到用户名
-        String guestPwd = new String((char[])token.getCredentials()); //得到密码
-        List<UmsAdminAuth> list = service.getAdmin(guestName);
-        if(list.size() == 0) {
-            throw new UnknownAccountException("账户或密码错误");
+        String guestName = (String)token.getPrincipal();  //访客用户名
+        List<UmsAdminAuth> list = service.getAdmin(guestName);// 无记录
+        if(list.size() == 0 || list.size() != 1) {
+            throw new UnknownAccountException("账户不存在");
         }
+        UmsAdminAuth adminAuth = list.get(0);
 
-        return new SimpleAuthenticationInfo(guestName, "123", getName());
+        // 对照密码
+        String ControlPwd = adminAuth.getPassword();
+
+        return new SimpleAuthenticationInfo(guestName, ControlPwd, getName());
     }
 }
