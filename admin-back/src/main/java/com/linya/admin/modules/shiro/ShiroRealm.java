@@ -1,14 +1,13 @@
 package com.linya.admin.modules.shiro;
 
 import com.linya.admin.dto.UmsAdminAuth;
+import com.linya.admin.modules.cstp.Cstp;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 public class ShiroRealm extends AuthorizingRealm {
 
@@ -48,11 +47,12 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String guestName = (String)token.getPrincipal();  //访客用户名
-        List<UmsAdminAuth> list = service.getAdmin(guestName);// 无记录
-        if(list.size() == 0 || list.size() != 1) {
+        Cstp<UmsAdminAuth> cstp = service.getAdmin(guestName);
+        if(!cstp.isOk()) {
             throw new UnknownAccountException("账户不存在");
         }
-        UmsAdminAuth adminAuth = list.get(0);
+        UmsAdminAuth adminAuth = cstp.getData();
+//        throw new LockedAccountException();
 
         // 对照密码
         String ControlPwd = adminAuth.getPassword();

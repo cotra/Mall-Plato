@@ -20,7 +20,7 @@ public class AuthController {
     @RequiresGuest
     @GetMapping("login")
     public Api<String> login() {
-        Cstp<String> cstp = service.login("admin", "123456");
+        Cstp<String> cstp = service.login("admin", "1234567");
         if(cstp.isOk()) {
             return Result.ok("登录成功");
         } else {

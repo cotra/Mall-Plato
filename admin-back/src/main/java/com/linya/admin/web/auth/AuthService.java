@@ -5,6 +5,7 @@ import com.linya.admin.modules.cstp.Sender;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class AuthService {
      */
     public Cstp<String> login(String username, String password) {
         Subject subject = SecurityUtils.getSubject();
+
+        String base64Encoded = Base64.encodeToString(username.getBytes());
+        System.out.println(base64Encoded);
         // 密码处理
         try {
             subject.login(new UsernamePasswordToken(username, password));
