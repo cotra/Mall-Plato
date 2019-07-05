@@ -1,9 +1,9 @@
-package com.linya.admin.web.auth;
+package com.linya.admin.ums.auth;
 
 import com.linya.admin.modules.api.Api;
 import com.linya.admin.modules.api.Result;
-import com.linya.admin.config.ApiUrlConfig;
 import com.linya.admin.modules.cstp.Cstp;
+import com.linya.admin.ums.UmsApiUrl;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = ApiUrlConfig.AUTH)
+@RequestMapping(value = UmsApiUrl.AUTH)
 public class AuthController {
 
     @Autowired

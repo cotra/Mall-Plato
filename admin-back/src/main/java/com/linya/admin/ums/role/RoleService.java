@@ -1,6 +1,6 @@
-package com.linya.admin.web.role;
+package com.linya.admin.ums.role;
 
-import com.linya.admin.web.role.dao.RoleDao;
+import com.linya.admin.ums.role.dao.RoleDao;
 import com.linya.admin.po.UmsRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

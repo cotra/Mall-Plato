@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+    <!--不要用yml文件配置-->
     <properties resource="generator.properties"/>
 
     <context id="MariaDB" targetRuntime="MyBatis3" defaultModelType="flat">

@@ -1,11 +1,11 @@
-package com.linya.admin.web.auth;
+package com.linya.admin.ums.auth;
 
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.modules.cstp.Sender;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class AuthService {
     public Cstp<String> login(String username, String password) {
         Subject subject = SecurityUtils.getSubject();
 
-        String base64Encoded = Base64.encodeToString(username.getBytes());
+        String base64Encoded = new Md5Hash(password, "123").toString();
         System.out.println(base64Encoded);
         // 密码处理
         try {

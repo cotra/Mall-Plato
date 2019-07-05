@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.linya.admin.web.role.dao.RoleDao">
+<mapper namespace="com.linya.admin.ums.role.dao.RoleDao">
     <!-- result map -->
     <resultMap id="ResultMap" type="com.linya.admin.po.UmsRole">
         <id column="id" property="id" jdbcType="BIGINT"/>

@@ -15,6 +15,7 @@ public class ShiroRealmService {
     UmsAdminDao umsAdminDao;
 
     public Cstp<UmsAdminAuth> getAdmin(String username) {
+
         List<UmsAdminAuth> list = umsAdminDao.getList(username);
         if(list.size() == 0 || list.size() != 1) {
             return Sender.fail();

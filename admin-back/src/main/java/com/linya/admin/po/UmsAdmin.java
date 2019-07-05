@@ -10,8 +10,6 @@ public class UmsAdmin implements Serializable {
 
     private String password;
 
-    private String salt;
-
     private String icon;
 
     private String email;
@@ -50,14 +48,6 @@ public class UmsAdmin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public String getIcon() {
@@ -125,7 +115,6 @@ public class UmsAdmin implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", salt=").append(salt);
         sb.append(", icon=").append(icon);
         sb.append(", email=").append(email);
         sb.append(", nickName=").append(nickName);

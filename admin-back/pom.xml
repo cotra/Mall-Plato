@@ -24,7 +24,7 @@
     </properties>
 
     <dependencies>
-        <!-- starter-web -->
+        <!-- starter-ums -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
