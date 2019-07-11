@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
+    // 账户已经登录
+    public static String ACCOUNT_ONLINE = "ACCOUNT_ONLINE";
     // 账户验证失败
     public static String ACCOUNT_FAIL = "ACCOUNT_FAIL";
     // 账户被锁定
@@ -22,6 +24,10 @@ public class AuthService {
      */
     public Cstp<String> login(LoginReq req) {
         Subject subject = SecurityUtils.getSubject();
+
+        if(subject.isAuthenticated()) {
+            return Result.fail(ACCOUNT_ONLINE);
+        }
         try {
             subject.login(new UsernamePasswordToken(req.getUsername(), AuthBo.passwordToMd5Hash(req.getPassword())));
             return Result.ok();
@@ -43,7 +49,6 @@ public class AuthService {
             subject.logout();
             return Result.ok();
         } catch (AuthenticationException e) {
-            e.printStackTrace();
             return Result.fail();
         }
     }

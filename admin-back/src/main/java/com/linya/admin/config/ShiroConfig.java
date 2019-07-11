@@ -34,8 +34,9 @@ public class ShiroConfig {
      */
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
+        // 需认证
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
-        definition.addPathDefinition(UmsApiUrl.ADMIN + "**", "authc");
+        definition.addPathDefinition(UmsApiUrl.ROLE + "/**", "authc");
         return definition;
     }
 }

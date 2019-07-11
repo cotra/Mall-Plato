@@ -5,7 +5,6 @@ import com.linya.admin.modules.api.Sender;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.ums.UmsApiUrl;
 import com.linya.admin.ums.auth.dto.LoginReq;
-import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +16,13 @@ public class AuthController {
     @Autowired
     AuthService service;
 
-    @RequiresGuest
     @PostMapping("login")
     public Api<String> login(@RequestBody @Validated LoginReq req) {
         Cstp<String> cstp = service.login(req);
         if(cstp.isOk()) {
             return Sender.ok("登录成功", null);
+        } else if (cstp.getFlag().equals(service.ACCOUNT_ONLINE)) {
+            return Sender.fail("账号已经登录", null);
         } else if(cstp.getFlag().equals(service.ACCOUNT_FAIL)) {
             return Sender.fail("账号或密码错误", null);
         } else if(cstp.getFlag().equals(service.ACCOUNT_LOCKED)) {
