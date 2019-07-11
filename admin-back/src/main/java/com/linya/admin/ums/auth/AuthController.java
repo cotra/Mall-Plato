@@ -23,8 +23,12 @@ public class AuthController {
         Cstp<String> cstp = service.login(req);
         if(cstp.isOk()) {
             return Sender.ok("登录成功", null);
+        } else if(cstp.getFlag().equals(service.ACCOUNT_FAIL)) {
+            return Sender.fail("账号或密码错误", null);
+        } else if(cstp.getFlag().equals(service.ACCOUNT_LOCKED)) {
+            return Sender.fail("该账号已被锁定", null);
         } else {
-            return Sender.ok("用户名或密码错误", null);
+            return Sender.fail("登录失败", null);
         }
     }
 

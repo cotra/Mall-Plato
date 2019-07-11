@@ -49,10 +49,12 @@ public class ShiroRealm extends AuthorizingRealm {
         String guestName = (String)token.getPrincipal();  //访客用户名
         Cstp<UmsAdminAuth> cstp = service.getAdmin(guestName); // 根据访客用户名查找用户
         if(!cstp.isOk()) {
-            throw new UnknownAccountException("账户不存在");
+            throw new UnknownAccountException();
         }
         UmsAdminAuth ControlAdmin = cstp.getData();
-//        throw new LockedAccountException();
+        if(ControlAdmin.getStatus() == 0) {
+            throw new LockedAccountException();
+        }
 
         // 返回对照用户名和对照MD5
         return new SimpleAuthenticationInfo(ControlAdmin.getUsername(), ControlAdmin.getPassword(), getName());
