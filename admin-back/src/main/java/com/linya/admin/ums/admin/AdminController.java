@@ -25,9 +25,9 @@ public class AdminController {
     public Api<Long> add(@RequestBody @Validated AddReq req) {
         Cstp<Long> cstp = service.add(req);
         if(cstp.isOk()) {
-            return Sender.ok(cstp.getData());
+            return Sender.ok("添加管理员成功", cstp.getData());
         } else {
-            return Sender.ok(null);
+            return Sender.fail("添加管理员失败", null);
         }
     }
 }

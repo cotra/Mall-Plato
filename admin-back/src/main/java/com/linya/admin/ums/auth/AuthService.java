@@ -1,11 +1,12 @@
 package com.linya.admin.ums.auth;
 
+import com.linya.admin.bo.AuthBo;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.modules.cstp.Result;
+import com.linya.admin.ums.auth.dto.LoginReq;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +16,14 @@ public class AuthService {
     /**
      * 登录
      */
-    public Cstp<String> login(String username, String password) {
+    public Cstp<String> login(LoginReq req) {
         Subject subject = SecurityUtils.getSubject();
-
-        String base64Encoded = new Md5Hash(password, "123").toString();
-        System.out.println(base64Encoded);
         // 密码处理
         try {
-            subject.login(new UsernamePasswordToken(username, password));
+            subject.login(new UsernamePasswordToken(req.getUsername(), AuthBo.passwordToMd5Hash(req.getPassword())));
             return Result.ok();
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            System.out.println("-----------------------------");
             return Result.fail();
         }
     }

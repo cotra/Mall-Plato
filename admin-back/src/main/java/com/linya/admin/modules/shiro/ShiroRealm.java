@@ -47,16 +47,14 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String guestName = (String)token.getPrincipal();  //访客用户名
-        Cstp<UmsAdminAuth> cstp = service.getAdmin(guestName);
+        Cstp<UmsAdminAuth> cstp = service.getAdmin(guestName); // 根据访客用户名查找用户
         if(!cstp.isOk()) {
             throw new UnknownAccountException("账户不存在");
         }
-        UmsAdminAuth adminAuth = cstp.getData();
+        UmsAdminAuth ControlAdmin = cstp.getData();
 //        throw new LockedAccountException();
 
-        // 对照密码
-        String ControlPwd = adminAuth.getPassword();
-
-        return new SimpleAuthenticationInfo(guestName, ControlPwd, getName());
+        // 返回对照用户名和对照MD5
+        return new SimpleAuthenticationInfo(ControlAdmin.getUsername(), ControlAdmin.getPassword(), getName());
     }
 }

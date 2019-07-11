@@ -2,6 +2,7 @@ package com.linya.admin.ums.admin;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import com.linya.admin.bo.AuthBo;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.modules.cstp.Result;
 import com.linya.admin.po.UmsAdmin;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
+
     @Autowired
     AdminDao dao;
 
@@ -20,15 +22,15 @@ public class AdminService {
         UmsAdmin admin = new UmsAdmin();
         BeanUtil.copyProperties(req, admin);
         // 业务逻辑
+        admin.setPassword(AuthBo.passwordToMd5Hash(admin.getPassword()));
         admin.setCreateTime(DateUtil.date());
         // dao调用
         dao.add(admin);
         // result返回
         Long id = admin.getId();
-        if(id != null) {
-            return Result.ok(id);
-        } else {
+        if(id == null) {
             return Result.fail();
         }
+        return Result.ok(id);
     }
 }

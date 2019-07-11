@@ -11,7 +11,7 @@ public class Sender {
         return api;
     }
 
-    // 成功返回,无数据
+    // 成功返回
     public static final <T> Api<T> ok() {
         String code = Code.SUCCESS.getCode();
         String msg = Code.SUCCESS.getMsg();
@@ -19,7 +19,7 @@ public class Sender {
         return Api;
     }
 
-    // 成功返回,有数据
+    // 成功返回
     public static final <T> Api<T> ok(T data) {
         String code = Code.SUCCESS.getCode();
         String msg = Code.SUCCESS.getMsg();
@@ -27,7 +27,14 @@ public class Sender {
         return Api;
     }
 
-    // 失败返回,无数据
+    // 成功返回
+    public static final <T> Api<T> ok(String msg, T data) {
+        String code = Code.SUCCESS.getCode();
+        Api<T> Api = create(code, msg, data);
+        return Api;
+    }
+
+    // 失败返回
     public static final <T> Api<T> fail() {
         String code = Code.FAILURE.getCode();
         String msg = Code.FAILURE.getMsg();
@@ -40,13 +47,6 @@ public class Sender {
         String code = Code.FAILURE.getCode();
         String msg = Code.FAILURE.getMsg();
         Api<T> Api = create(code, msg, data);
-        return Api;
-    }
-
-    // 失败返回
-    public static final <T> Api<T> fail(String msg) {
-        String code = Code.FAILURE.getCode();
-        Api<T> Api = create(code, msg, null);
         return Api;
     }
 
