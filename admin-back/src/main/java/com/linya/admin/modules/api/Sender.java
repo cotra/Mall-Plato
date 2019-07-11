@@ -35,7 +35,7 @@ public class Sender {
         return Api;
     }
 
-    // 失败返回,有数据
+    // 失败返回
     public static final <T> Api<T> fail(T data) {
         String code = Code.FAILURE.getCode();
         String msg = Code.FAILURE.getMsg();
@@ -43,9 +43,17 @@ public class Sender {
         return Api;
     }
 
-    // 失败返回,有数据
-    public static final <T> Api<T> fail(Code code, T data) {
-        Api<T> Api = create(code.getCode(), code.getMsg(), data);
+    // 失败返回
+    public static final <T> Api<T> fail(String msg) {
+        String code = Code.FAILURE.getCode();
+        Api<T> Api = create(code, msg, null);
+        return Api;
+    }
+
+    // 失败返回
+    public static final <T> Api<T> fail(String msg, T data) {
+        String code = Code.FAILURE.getCode();
+        Api<T> Api = create(code, msg, data);
         return Api;
     }
 }
