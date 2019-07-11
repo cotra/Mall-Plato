@@ -42,4 +42,10 @@ public class Sender {
         Api<T> Api = create(code, msg, data);
         return Api;
     }
+
+    // 失败返回,有数据
+    public static final <T> Api<T> fail(Code code, T data) {
+        Api<T> Api = create(code.getCode(), code.getMsg(), data);
+        return Api;
+    }
 }

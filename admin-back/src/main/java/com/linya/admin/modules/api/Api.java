@@ -11,6 +11,8 @@ public class Api<T> implements Serializable {
     private String msg;
     private T data;
 
+    private static final long serialVersionUID = 1L;
+
     public Api() {
     }
 
@@ -42,5 +44,18 @@ public class Api<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", code=").append(code);
+        sb.append(", msg=").append(msg);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

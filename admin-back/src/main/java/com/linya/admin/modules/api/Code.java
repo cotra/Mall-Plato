@@ -7,7 +7,8 @@ public enum Code {
     // 成功
     SUCCESS("1000", "操作成功"),
     // 失败
-    FAILURE("2000", "操作失败");
+    FAILURE("2000", "操作失败"),
+    FAILURE_VALIDATED("2001", "参数校验失败");
 
     private final String code;
     private final String msg;

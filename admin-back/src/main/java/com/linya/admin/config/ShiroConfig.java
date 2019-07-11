@@ -1,6 +1,7 @@
 package com.linya.admin.config;
 
 import com.linya.admin.modules.shiro.ShiroRealm;
+import com.linya.admin.ums.UmsApiUrl;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -34,7 +35,7 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
-        definition.addPathDefinition(ApiUrlConfig.ROLE + "**", "authc");
+        definition.addPathDefinition(UmsApiUrl.ADMIN + "**", "authc");
         return definition;
     }
 }
