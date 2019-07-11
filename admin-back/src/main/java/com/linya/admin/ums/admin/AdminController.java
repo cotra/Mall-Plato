@@ -1,9 +1,9 @@
 package com.linya.admin.ums.admin;
 
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Result;
+import com.linya.admin.modules.api.Sender;
 import com.linya.admin.modules.cstp.Cstp;
-import com.linya.admin.modules.cstp.Sender;
+import com.linya.admin.modules.cstp.Result;
 import com.linya.admin.ums.UmsApiUrl;
 import com.linya.admin.ums.admin.dto.AddReq;
 import org.apache.shiro.authz.annotation.RequiresGuest;
@@ -20,11 +20,12 @@ public class AdminController {
     @RequiresGuest
     @PostMapping("add")
     public Api<String> add(@RequestBody @Validated AddReq req) {
-        Cstp<String> cstp = Sender.ok();
+        System.out.println(req.toString());
+        Cstp<String> cstp = Result.ok();
         if(cstp.isOk()) {
-            return Result.ok("添加管理员成功");
+            return Sender.ok("添加管理员成功");
         } else {
-            return Result.ok("添加管理员失败");
+            return Sender.ok("添加管理员失败");
         }
     }
 }

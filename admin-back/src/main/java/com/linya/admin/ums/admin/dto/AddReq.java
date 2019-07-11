@@ -1,8 +1,9 @@
 package com.linya.admin.ums.admin.dto;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
-public class AddReq {
+public class AddReq implements Serializable {
     @NotBlank(message = "账户名称不能为空")
     private String username;
     @NotBlank(message = "账户密码不能为空")

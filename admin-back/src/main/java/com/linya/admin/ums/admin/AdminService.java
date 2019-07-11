@@ -2,7 +2,7 @@ package com.linya.admin.ums.admin;
 
 import cn.hutool.core.date.DateUtil;
 import com.linya.admin.modules.cstp.Cstp;
-import com.linya.admin.modules.cstp.Sender;
+import com.linya.admin.modules.cstp.Result;
 import com.linya.admin.po.UmsAdmin;
 import com.linya.admin.ums.admin.dao.AdminDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class AdminService {
         // 返回
         Long id = admin.getId();
         if(id != null) {
-            return Sender.ok(id);
+            return Result.ok(id);
         } else {
-            return Sender.fail();
+            return Result.fail();
         }
     }
 }

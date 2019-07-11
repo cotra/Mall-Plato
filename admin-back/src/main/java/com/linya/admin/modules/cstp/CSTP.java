@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class Cstp<T> implements Serializable {
     private boolean ok;
     private T data;
-    private Integer flag;
+    private String flag;
 
-    public Cstp(boolean ok, T data, Integer flag) {
+    public Cstp(boolean ok, T data, String flag) {
         this.ok = ok;
         this.data = data;
         this.flag = flag;
@@ -29,11 +29,11 @@ public class Cstp<T> implements Serializable {
         this.data = data;
     }
 
-    public Integer getFlag() {
+    public String getFlag() {
         return flag;
     }
 
-    public void setFlag(Integer flag) {
+    public void setFlag(String flag) {
         this.flag = flag;
     }
 }

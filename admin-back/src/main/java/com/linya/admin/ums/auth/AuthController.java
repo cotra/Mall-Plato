@@ -1,7 +1,7 @@
 package com.linya.admin.ums.auth;
 
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Result;
+import com.linya.admin.modules.api.Sender;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.ums.UmsApiUrl;
 import org.apache.shiro.authz.annotation.RequiresGuest;
@@ -22,9 +22,9 @@ public class AuthController {
     public Api<String> login() {
         Cstp<String> cstp = service.login("admin", "1234567");
         if(cstp.isOk()) {
-            return Result.ok("登录成功");
+            return Sender.ok("登录成功");
         } else {
-            return Result.ok("用户名或密码错误");
+            return Sender.ok("用户名或密码错误");
         }
     }
 
@@ -32,19 +32,19 @@ public class AuthController {
     public Api<String> logout() {
         Cstp<String> cstp = service.logout();
         if(cstp.isOk()) {
-            return Result.ok("注销成功");
+            return Sender.ok("注销成功");
         } else {
-            return Result.ok("注销失败");
+            return Sender.ok("注销失败");
         }
     }
 
     @GetMapping("please")
     public Api<String> please() {
-        return Result.fail("请登录");
+        return Sender.fail("请登录");
     }
 
     @GetMapping("unauthorized")
     public Api<String> unauthorized() {
-        return Result.fail("用户无此权限");
+        return Sender.fail("用户无此权限");
     }
 }

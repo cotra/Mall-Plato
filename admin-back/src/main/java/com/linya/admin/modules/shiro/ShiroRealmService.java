@@ -3,7 +3,7 @@ package com.linya.admin.modules.shiro;
 import com.linya.admin.dao.UmsAdminDao;
 import com.linya.admin.dto.UmsAdminAuth;
 import com.linya.admin.modules.cstp.Cstp;
-import com.linya.admin.modules.cstp.Sender;
+import com.linya.admin.modules.cstp.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +18,8 @@ public class ShiroRealmService {
 
         List<UmsAdminAuth> list = umsAdminDao.getList(username);
         if(list.size() == 0 || list.size() != 1) {
-            return Sender.fail();
+            return Result.fail();
         }
-        return Sender.ok(list.get(0));
+        return Result.ok(list.get(0));
     }
 }

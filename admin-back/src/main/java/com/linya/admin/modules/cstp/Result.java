@@ -1,9 +1,9 @@
 package com.linya.admin.modules.cstp;
 
-public class Sender {
+public class Result {
 
     // 生成方法
-    public static final <T> Cstp<T> create(boolean ok, T data, Integer flag) {
+    public static final <T> Cstp<T> create(boolean ok, T data, String flag) {
         Cstp<T> result = new Cstp<>(ok, data, flag);
         return result;
     }
@@ -27,7 +27,7 @@ public class Sender {
     }
 
     // 失败返回,有标识
-    public static final <T> Cstp<T> fail(Integer flag) {
+    public static final <T> Cstp<T> fail(String flag) {
         Cstp<T> result = create(false, null, flag);
         return result;
     }
