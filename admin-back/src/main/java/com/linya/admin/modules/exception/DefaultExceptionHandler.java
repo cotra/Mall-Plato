@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class DefaultExceptionHandler {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+    public static Logger LOG = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
     /**
      * 参数验证失败
@@ -31,7 +31,7 @@ public class DefaultExceptionHandler {
     @ExceptionHandler({HttpMessageNotReadableException.class})
     public Api<String> requestNotReadable(HttpMessageNotReadableException ex) {
         String message = ex.getMessage();
-        LOGGER.error("参数格式不合法", message);
+        LOG.error("参数格式不合法", message);
         return Sender.fail("参数格式不合法", message);
     }
 

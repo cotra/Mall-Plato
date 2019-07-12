@@ -14,24 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class ShiroConfig {
 
     /**
-     * 实现的realm
-     */
-    @Bean
-    public ShiroRealm shiroRealm() {
-        return new ShiroRealm();
-    }
-
-    /**
-     * 授权管理器
-     */
-    @Bean
-    public DefaultWebSecurityManager securityManager() {
-        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        manager.setRealm(shiroRealm());
-        return manager;
-    }
-
-    /**
      * 授权控制配置
      */
     @Bean
@@ -42,8 +24,22 @@ public class ShiroConfig {
         return definition;
     }
 
+    // 实现的realm
     @Bean
-    public CacheManager cacheManager() {
+    public ShiroRealm shiroRealm() {
+        return new ShiroRealm();
+    }
+
+    @Bean
+    protected CacheManager cacheManager() {
         return new MemoryConstrainedCacheManager();
+    }
+
+    // 授权管理器
+    @Bean
+    public DefaultWebSecurityManager securityManager() {
+        DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
+        manager.setRealm(shiroRealm());
+        return manager;
     }
 }

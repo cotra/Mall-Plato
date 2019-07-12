@@ -7,11 +7,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 
 public class ShiroRealm extends AuthorizingRealm {
+
+    public static Logger LOG = LoggerFactory.getLogger(ShiroRealm.class);
 
     @Autowired
     ShiroRealmService service;
@@ -37,6 +41,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
+        LOG.info("授权访问验证");
         UmsAdminAuth user = (UmsAdminAuth) getAvailablePrincipal(principal);
         Cstp<Set<String>> roles = service.getAdminRoles(user.getId());
         Cstp<Set<String>> perms = service.getAdminPerms(user.getId());
