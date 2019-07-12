@@ -35,6 +35,7 @@ mybatis:
 shiro:
   loginUrl: /api/ums/auth/please
   unauthorizedUrl: /api/ums/auth/unauthorized
+  enabled: true
   web:
     enabled: true
   sessionManager:

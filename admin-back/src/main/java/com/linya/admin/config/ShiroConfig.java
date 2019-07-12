@@ -2,6 +2,8 @@ package com.linya.admin.config;
 
 import com.linya.admin.modules.shiro.ShiroRealm;
 import com.linya.admin.ums.UmsApiUrl;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -12,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class ShiroConfig {
 
     /**
-     * 自定义realm
+     * 实现的realm
      */
     @Bean
     public ShiroRealm shiroRealm() {
@@ -36,7 +38,12 @@ public class ShiroConfig {
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         // 需认证
         DefaultShiroFilterChainDefinition definition = new DefaultShiroFilterChainDefinition();
-        definition.addPathDefinition(UmsApiUrl.ROLE + "/**", "authc");
+        definition.addPathDefinition(UmsApiUrl.ROLE + "/**", "authc,roles[PRODUCT_MANAGER]");
         return definition;
+    }
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new MemoryConstrainedCacheManager();
     }
 }
