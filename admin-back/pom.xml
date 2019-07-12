@@ -20,11 +20,10 @@
         <mybatis.version>2.0.1</mybatis.version>
         <pagehelper.version>1.2.12</pagehelper.version>
         <hutool.version>4.5.16</hutool.version>
-        <shiro.version>1.4.1</shiro.version>
     </properties>
 
     <dependencies>
-        <!-- starter-ums -->
+        <!-- starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -74,11 +73,10 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring-boot-web-starter -->
+        <!-- security -->
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot-web-starter</artifactId>
-            <version>${shiro.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter-->
         <dependency>

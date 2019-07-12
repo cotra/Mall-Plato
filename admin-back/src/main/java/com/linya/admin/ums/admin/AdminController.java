@@ -5,7 +5,6 @@ import com.linya.admin.modules.api.Sender;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.ums.UmsApiUrl;
 import com.linya.admin.ums.admin.dto.AddReq;
-import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ public class AdminController {
     @Autowired
     AdminService service;
 
-    @RequiresGuest
     @PostMapping("add")
     public Api<Long> add(@RequestBody @Validated AddReq req) {
         Cstp<Long> cstp = service.add(req);

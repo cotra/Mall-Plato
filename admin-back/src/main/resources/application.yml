@@ -31,15 +31,5 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.linya.admin.po
-# Shiro
-shiro:
-  loginUrl: /api/ums/auth/please
-  unauthorizedUrl: /api/ums/auth/unauthorized
-  enabled: true
-  web:
-    enabled: true
-  sessionManager:
-    sessionIdCookieEnabled: true
-    sessionIdUrlRewritingEnabled: true
 
 
