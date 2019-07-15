@@ -8,13 +8,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SecurityUser implements UserDetails {
+public class AppUserDetails implements UserDetails {
 
     private String username;
     private String password;
     private Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 
-    public SecurityUser(String username, String password) {
+    public AppUserDetails(String username, String password) {
         this.password = password;
         this.username = username;
     }
