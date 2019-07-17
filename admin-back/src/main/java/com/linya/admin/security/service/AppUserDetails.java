@@ -1,4 +1,4 @@
-package com.linya.admin.security.model;
+package com.linya.admin.security.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
