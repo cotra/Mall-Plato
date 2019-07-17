@@ -1,4 +1,4 @@
-package com.linya.admin.modules.security.handler;
+package com.linya.admin.security.handler;
 
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;

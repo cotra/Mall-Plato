@@ -1,8 +1,7 @@
-package com.linya.admin.config;
+package com.linya.admin.security;
 
-import com.linya.admin.modules.security.Point.AppAuthenticationEntryPoint;
-import com.linya.admin.modules.security.handler.AppAccessDeniedHandler;
-import com.linya.admin.modules.security.service.AppUserDetailsService;
+import com.linya.admin.security.filter.AppAuthenticationFilter;
+import com.linya.admin.security.service.AppUserDetailsService;
 import com.linya.admin.ums.UmsApiUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
 
     @Bean
-    UserDetailsService customUserDetailsService() {
+    public UserDetailsService customUserDetailsService() {
         return new AppUserDetailsService();
     }
 
@@ -30,27 +30,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder builder) {
-        try {
-            builder.userDetailsService(customUserDetailsService());
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error(e.getMessage());
-        }
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(customUserDetailsService());
     }
 
     //请求拦截
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 不使用csrf
-        HttpSecurity security = http.csrf().disable();
+        // 不使用csrf/表单登录
+        HttpSecurity security = http.csrf().disable().formLogin().disable();
         // 规则
-        HttpSecurity set = security.authorizeRequests().antMatchers(UmsApiUrl.ROLE + "/*").authenticated().and();
+        HttpSecurity and = security.authorizeRequests().antMatchers(UmsApiUrl.ROLE + "/*").authenticated().and();
+        // filter
+        and.addFilterAt(new AppAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         // 自定义返回
-        set.exceptionHandling().authenticationEntryPoint(new AppAuthenticationEntryPoint()).accessDeniedHandler(new AppAccessDeniedHandler()).and();
+//        set.exceptionHandling().authenticationEntryPoint(new AppAuthenticationEntryPoint()).accessDeniedHandler(new AppAccessDeniedHandler()).and();
     }
 
-    public void configure(WebSecurity web) {
+    public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
     }
 }
