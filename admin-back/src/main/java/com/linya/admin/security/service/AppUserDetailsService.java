@@ -10,6 +10,9 @@ public class AppUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         System.out.println("AppUserDetailsService" + " | " + s);
         AppUserDetails details = new AppUserDetails("admin", "{noop}" + "123456");
+
+//        throw new UsernameNotFoundException("用户名不存在");
+//        throw new LockedException("用户被锁定");
         return details;
     }
 }

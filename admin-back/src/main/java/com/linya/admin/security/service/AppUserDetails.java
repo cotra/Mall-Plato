@@ -3,9 +3,10 @@ package com.linya.admin.security.service;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public class AppUserDetails implements UserDetails {
+public class AppUserDetails implements UserDetails, Serializable {
     private String username;
     private String password;
 

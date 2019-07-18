@@ -1,5 +1,6 @@
 package com.linya.admin.ums.auth;
 
+import com.linya.admin.config.CoreConfig;
 import com.linya.admin.modules.api.Api;
 import com.linya.admin.modules.api.Sender;
 import com.linya.admin.modules.cstp.Cstp;
@@ -15,6 +16,9 @@ public class AuthController {
 
     @Autowired
     AuthService service;
+
+    @Autowired
+    CoreConfig coreConfig;
 
     @PostMapping("login")
     public Api<String> login(@RequestBody @Validated LoginReq req) {

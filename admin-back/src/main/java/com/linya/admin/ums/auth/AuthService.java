@@ -1,12 +1,17 @@
 package com.linya.admin.ums.auth;
 
+import com.linya.admin.bo.JwtTokenBo;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.modules.cstp.Result;
 import com.linya.admin.ums.auth.dto.LoginReq;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
+
+    @Autowired
+    JwtTokenBo jwtTokenBo;
 
     // 账户已经登录
     public static String ACCOUNT_ONLINE = "ACCOUNT_ONLINE";
@@ -19,6 +24,8 @@ public class AuthService {
      * 登录
      */
     public Cstp<String> login(LoginReq req) {
+        String s = jwtTokenBo.generate("12312");
+        System.out.println(s);
 //        Subject subject = SecurityUtils.getSubject();
 //
 //        if(subject.isAuthenticated()) {

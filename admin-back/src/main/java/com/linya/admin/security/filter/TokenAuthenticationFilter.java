@@ -18,7 +18,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         // 设置对比项
         SecurityContext context = SecurityContextHolder.getContext();
         if(context.getAuthentication() == null) {
-            context.setAuthentication(new UsernamePasswordAuthenticationToken("123123", "231"));
+            context.setAuthentication(new UsernamePasswordAuthenticationToken("admin", "123456"));
         }
         // 继续
         filterChain.doFilter(req, res);
