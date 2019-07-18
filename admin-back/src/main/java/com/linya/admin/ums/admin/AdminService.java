@@ -17,12 +17,15 @@ public class AdminService {
     @Autowired
     AdminDao dao;
 
+    @Autowired
+    AuthBo authBo;
+
     public Cstp<Long> add(AddReq req) {
         // 合并属性
         UmsAdmin admin = new UmsAdmin();
         BeanUtil.copyProperties(req, admin);
         // 业务逻辑
-        admin.setPassword(AuthBo.passwordToMd5Hash(admin.getPassword()));
+        admin.setPassword(authBo.encode(admin.getPassword()));
         admin.setCreateTime(DateUtil.date());
         // dao调用
         dao.add(admin);

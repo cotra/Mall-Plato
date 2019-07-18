@@ -31,5 +31,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.linya.admin.po
+  configuration:
+    map-underscore-to-camel-case: true
 
 

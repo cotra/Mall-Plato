@@ -9,7 +9,7 @@ public class AppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         System.out.println("AppUserDetailsService" + " | " + s);
-        AppUserDetails details = new AppUserDetails("admin", "{noop}" + "123456");
+        AppUserDetails details = new AppUserDetails("3", "{noop}" + "3");
 
 //        throw new UsernameNotFoundException("用户名不存在");
 //        throw new LockedException("用户被锁定");

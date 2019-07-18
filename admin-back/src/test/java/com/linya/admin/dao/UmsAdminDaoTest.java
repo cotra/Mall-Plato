@@ -1,6 +1,6 @@
 package com.linya.admin.dao;
 
-import com.linya.admin.dto.UmsAdminAuth;
+import com.linya.admin.po.UmsAdmin;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,14 @@ public class UmsAdminDaoTest {
     UmsAdminDao dao;
 
     @Test
-    public void getList() {
-        List<UmsAdminAuth> list = dao.getList("admin");
+    public void getListByName() {
+        List<UmsAdmin> list = dao.getListByName("admin");
+        System.out.println(list.get(0).toString());
+    }
+
+    @Test
+    public void getListById() {
+        List<UmsAdmin> list = dao.getListById(3L);
         System.out.println(list.get(0).toString());
     }
 }

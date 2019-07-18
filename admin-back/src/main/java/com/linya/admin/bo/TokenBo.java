@@ -12,9 +12,10 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.HashMap;
 
 @Component
-public class JwtTokenBo {
+public class TokenBo {
 
     public static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
@@ -30,11 +31,15 @@ public class JwtTokenBo {
     }
 
     // 生成jws
-    public String generate(String aud) {
+    public String generate(Long id, String aud, Date date) {
         byte[] keyBytes = getKeyBytes(coreConfig.getJWT_KEY());
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
-        Date date = new Date();
+        // data
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+
         JwtBuilder jws = Jwts.builder()
+                .setClaims(map)
                 .setIssuer(coreConfig.getJWT_ISS())
                 .setAudience(aud)
                 .setIssuedAt(date)

@@ -24,9 +24,7 @@ public class AuthController {
     public Api<String> login(@RequestBody @Validated LoginReq req) {
         Cstp<String> cstp = service.login(req);
         if(cstp.isOk()) {
-            return Sender.ok("登录成功", null);
-        } else if (cstp.getFlag().equals(service.ACCOUNT_ONLINE)) {
-            return Sender.fail("账号已经登录", null);
+            return Sender.ok("登录成功", cstp.getData());
         } else if(cstp.getFlag().equals(service.ACCOUNT_FAIL)) {
             return Sender.fail("账号或密码错误", null);
         } else if(cstp.getFlag().equals(service.ACCOUNT_LOCKED)) {

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:core/config.properties")
 public class CoreConfig {
 
+    @Value("${jwt.header}")
+    private String JWT_HEADER;
+
     @Value("${jwt.key}")
     private String JWT_KEY;
 
@@ -16,6 +19,10 @@ public class CoreConfig {
 
     @Value("${jwt.exp}")
     private Integer JWT_EXP;
+
+    public String getJWT_HEADER() {
+        return JWT_HEADER;
+    }
 
     public Integer getJWT_EXP() {
         return JWT_EXP;

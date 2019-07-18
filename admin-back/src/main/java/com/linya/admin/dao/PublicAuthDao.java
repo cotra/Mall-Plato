@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-public interface AuthDao {
+public interface PublicAuthDao {
 
     @Select("SELECT r.name FROM ums_admin_role_relation ar INNER JOIN ums_role r ON ar.role_id = r.id WHERE ar.admin_id=#{id}")
     List<UmsRole> getRoleList(@Param("id") Long id);
