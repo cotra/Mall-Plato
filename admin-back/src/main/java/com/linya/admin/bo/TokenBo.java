@@ -34,7 +34,8 @@ public class TokenBo {
     public String generate(Long id, String aud, Date date) {
         byte[] keyBytes = getKeyBytes(coreConfig.getJWT_KEY());
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
-        // data
+        // 添加自定义数据
+        // TODO 进行数据加密
         HashMap<String, Object> map = new HashMap<>();
         map.put("id", id);
 
@@ -57,7 +58,7 @@ public class TokenBo {
             return claimsJws;
         } catch (JwtException e) {
             LOGGER.error("jwt validate error:" + e.getMessage());
-            return null;
+            throw new JwtException("Invalid Token. " + e.getMessage());
         }
     }
 }
