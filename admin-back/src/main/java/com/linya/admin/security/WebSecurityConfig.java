@@ -2,6 +2,7 @@ package com.linya.admin.security;
 
 import com.linya.admin.security.Point.AppAuthenticationEntryPoint;
 import com.linya.admin.security.filter.TokenAuthenticationFilter;
+import com.linya.admin.security.handler.AppAccessDeniedHandler;
 import com.linya.admin.security.service.AppUserDetailsService;
 import com.linya.admin.ums.UmsApiUrl;
 import org.slf4j.Logger;
@@ -33,6 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    AppAccessDeniedHandler appAccessDeniedHandler() {
+        return new AppAccessDeniedHandler();
+    }
+
+    @Bean
     AppAuthenticationEntryPoint appAuthenticationEntryPoint() {
         return new AppAuthenticationEntryPoint();
     }
@@ -46,13 +52,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 不使用csrf/表单登录
-        HttpSecurity security = http.csrf().disable().formLogin().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().headers().cacheControl().disable().and();
-        // 认证
+        HttpSecurity security = http.csrf().disable().formLogin().disable().logout().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().headers().cacheControl().disable().and();
+        // filter
         HttpSecurity custom = security.addFilterAt(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        // 自定义返回
-        HttpSecurity role = custom.exceptionHandling().authenticationEntryPoint(appAuthenticationEntryPoint()).and();
+        // 自定义
+        HttpSecurity role = custom.exceptionHandling().authenticationEntryPoint(appAuthenticationEntryPoint()).accessDeniedHandler(appAccessDeniedHandler()).and();
         // 规则
-        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().anyRequest().authenticated();
+        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().anyRequest().authenticated().and();
     }
 
     public void configure(WebSecurity web) throws Exception {
