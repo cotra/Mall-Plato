@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 自定义
         HttpSecurity role = custom.exceptionHandling().authenticationEntryPoint(appAuthenticationEntryPoint()).accessDeniedHandler(appAccessDeniedHandler()).and();
         // 规则
-        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().anyRequest().authenticated().and();
+        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().antMatchers(UmsApiUrl.ROLE + "/**").authenticated();
     }
 
     public void configure(WebSecurity web) throws Exception {

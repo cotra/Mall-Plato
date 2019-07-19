@@ -8,7 +8,7 @@ server:
 logging:
   level:
     root: info
-    org.springframework.security: info
+#    org.springframework.security: info
 #  file: log/run.log
 # Spring
 spring:

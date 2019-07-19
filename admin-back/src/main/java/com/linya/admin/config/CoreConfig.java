@@ -11,6 +11,9 @@ public class CoreConfig {
     @Value("${jwt.header}")
     private String JWT_HEADER;
 
+    @Value("${jwt.head}")
+    private String JWT_HEAD;
+
     @Value("${jwt.key}")
     private String JWT_KEY;
 
@@ -22,6 +25,10 @@ public class CoreConfig {
 
     public String getJWT_HEADER() {
         return JWT_HEADER;
+    }
+
+    public String getJWT_HEAD() {
+        return JWT_HEAD;
     }
 
     public Integer getJWT_EXP() {

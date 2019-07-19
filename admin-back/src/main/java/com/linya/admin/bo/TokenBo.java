@@ -48,17 +48,17 @@ public class TokenBo {
         // 合成字符串
         String jwt = jws.signWith(key).compact();
         LOGGER.info("生成jwt:" + jwt);
-        return "Bearer "+ jwt;
+        return coreConfig.getJWT_HEAD() + " "+ jwt;
     }
 
     // 效验和返回
-    public Jws<Claims> validate(String token) {
+    public Jws<Claims> validate(String token) throws JwtException {
+        Jws<Claims> claimsJws;
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyBytes(coreConfig.getJWT_KEY())).parseClaimsJws(token.replace("Bearer ",""));
-            return claimsJws;
+            claimsJws = Jwts.parser().setSigningKey(getKeyBytes(coreConfig.getJWT_KEY())).parseClaimsJws(token.replace("Bearer ",""));
         } catch (JwtException e) {
-            LOGGER.error("jwt validate error:" + e.getMessage());
             throw new JwtException("Invalid Token. " + e.getMessage());
         }
+        return claimsJws;
     }
 }
