@@ -1,13 +1,13 @@
 package com.linya.admin.security;
 
-import com.linya.admin.security.Point.AppAuthenticationEntryPoint;
 import com.linya.admin.security.filter.TokenAuthenticationFilter;
 import com.linya.admin.security.handler.AppAccessDeniedHandler;
+import com.linya.admin.security.point.AppAuthenticationEntryPoint;
+import com.linya.admin.security.provider.AppAuthenticationProvider;
 import com.linya.admin.security.service.AppUserDetailsService;
 import com.linya.admin.ums.UmsApiUrl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,15 +18,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
 
-    @Autowired
-    AppUserDetailsService appUserDetailsService;
+    @Bean
+    AppUserDetailsService appUserDetailsService() {
+        return new AppUserDetailsService();
+    };
 
     @Bean
     TokenAuthenticationFilter tokenAuthenticationFilter() {
@@ -43,9 +44,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AppAuthenticationEntryPoint();
     }
 
+    @Bean
+    AppAuthenticationProvider appAuthenticationProvider() {
+        return new AppAuthenticationProvider();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
-        builder.userDetailsService(appUserDetailsService);
+//        builder.authenticationProvider(appAuthenticationProvider());
+    builder.userDetailsService(appUserDetailsService());
     }
 
     //请求拦截

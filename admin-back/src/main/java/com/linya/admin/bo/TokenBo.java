@@ -53,12 +53,15 @@ public class TokenBo {
 
     // 效验和返回
     public Jws<Claims> validate(String token) throws JwtException {
-        Jws<Claims> claimsJws;
-        try {
-            claimsJws = Jwts.parser().setSigningKey(getKeyBytes(coreConfig.getJWT_KEY())).parseClaimsJws(token.replace("Bearer ",""));
-        } catch (JwtException e) {
-            throw new JwtException("Invalid Token. " + e.getMessage());
+        if(token.startsWith(coreConfig.getJWT_HEAD())) {
+            try {
+                Jws<Claims> claimsJws = Jwts.parser().setSigningKey(getKeyBytes(coreConfig.getJWT_KEY())).parseClaimsJws(token.replace("Bearer ",""));
+                return claimsJws;
+            } catch (JwtException e) {
+                throw new JwtException("Invalid Token. " + e.getMessage());
+            }
+        } else {
+            throw new JwtException("Invalid Token. " + "非法抬头");
         }
-        return claimsJws;
     }
 }

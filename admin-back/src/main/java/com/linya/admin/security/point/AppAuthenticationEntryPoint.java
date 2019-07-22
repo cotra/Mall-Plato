@@ -1,4 +1,4 @@
-package com.linya.admin.security.Point;
+package com.linya.admin.security.point;
 
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
@@ -22,7 +22,7 @@ public class AppAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException, ServletException {
         LOGGER.warn("AuthenticationEntryPoint: " + e.getMessage());
 
-        Api<String> api = Sender.fail("身份认证未通过", e.getMessage());
+        Api<String> api = Sender.fail("身份凭证认证未通过", e.getMessage());
         JSON parse = JSONUtil.parse(api);
 
         res.setContentType("application/json");

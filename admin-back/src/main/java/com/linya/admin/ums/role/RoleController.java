@@ -19,6 +19,7 @@ public class RoleController {
 
     @GetMapping("list")
     public Api<List<UmsRole>> list() {
+
         List<UmsRole> list = service.getList();
         return Sender.ok(list);
     }
