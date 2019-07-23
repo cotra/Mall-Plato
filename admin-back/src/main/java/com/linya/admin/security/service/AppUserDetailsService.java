@@ -40,21 +40,20 @@ public class AppUserDetailsService implements UserDetailsService {
             Integer id = (Integer) jwsBody.get("id"); // id
             Date issuedAt = jwsBody.getIssuedAt(); // 签发时间
             Date expiration = jwsBody.getExpiration(); // 过期时间
-            String audience = jwsBody.getAudience(); // 用户名
-            System.out.println(issuedAt);
-            System.out.println(expiration);
-            System.out.println(audience);
+//            String audience = jwsBody.getAudience(); // 用户名
+//            LOGGER.info("用户" + " | id: " + id + " | user: " + audience + " | 签发日期: " + DateUtil.formatDateTime(issuedAt) + " | 截止日期: " + DateUtil.formatDateTime(expiration));
 
             List<UmsAdmin> list = umsAdminDao.getListById(id.longValue());
             if (list.size() == 0 || list == null || list.size() != 1) {
-                throw new DisabledException("用户或密码错误");
+                throw new BadCredentialsException("用户名或密码错误");
             }
-            UmsAdmin admin = list.get(0); // 要验证的用户
+            // 要验证的用户和内容
+            UmsAdmin admin = list.get(0);
             if (admin.getStatus() == 0) {
                 throw new LockedException("该用户已被锁定");
             }
             if(issuedAt.getTime() != admin.getLoginTime().getTime()) {
-                throw new BadCredentialsException("用户已重新登录,请使用最新凭据");
+                throw new DisabledException("用户已重新登录,请使用最新凭据");
             }
             if(new Date().getTime() > expiration.getTime()) {
                 throw new CredentialsExpiredException("该凭据已经过期失效");

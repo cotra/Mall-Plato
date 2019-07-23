@@ -26,7 +26,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
         String header = req.getHeader(coreConfig.getJWT_HEADER());
-        LOGGER.info("Arrivals Token: " + header);
+        LOGGER.info("Arrivals Request Token: " + header);
         if (header != null && !header.isEmpty()) {
             // 设置对比项
             SecurityContext context = SecurityContextHolder.getContext();

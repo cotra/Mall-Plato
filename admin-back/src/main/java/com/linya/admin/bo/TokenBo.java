@@ -46,9 +46,9 @@ public class TokenBo {
                 .setIssuedAt(date)
                 .setExpiration(DateUtil.offsetDay(date, coreConfig.getJWT_EXP()));
         // 合成字符串
-        String jwt = jws.signWith(key).compact();
-        LOGGER.info("生成jwt:" + jwt);
-        return coreConfig.getJWT_HEAD() + " "+ jwt;
+        String jwt = coreConfig.getJWT_HEAD() + " " + jws.signWith(key).compact();
+        LOGGER.info("生成jwt: " + jwt);
+        return jwt;
     }
 
     // 效验和返回

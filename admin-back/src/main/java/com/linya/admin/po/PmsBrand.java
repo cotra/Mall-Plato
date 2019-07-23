@@ -21,10 +21,6 @@ public class PmsBrand implements Serializable {
 
     private String logo;
 
-    private String bigPic;
-
-    private String brandStory;
-
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -99,22 +95,6 @@ public class PmsBrand implements Serializable {
         this.logo = logo;
     }
 
-    public String getBigPic() {
-        return bigPic;
-    }
-
-    public void setBigPic(String bigPic) {
-        this.bigPic = bigPic;
-    }
-
-    public String getBrandStory() {
-        return brandStory;
-    }
-
-    public void setBrandStory(String brandStory) {
-        this.brandStory = brandStory;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -130,8 +110,6 @@ public class PmsBrand implements Serializable {
         sb.append(", productCount=").append(productCount);
         sb.append(", productCommentCount=").append(productCommentCount);
         sb.append(", logo=").append(logo);
-        sb.append(", bigPic=").append(bigPic);
-        sb.append(", brandStory=").append(brandStory);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan({"com.linya.admin.dao", "com.linya.admin.ums.*.dao"})
+@MapperScan({"com.baomidou.mybatisplus.samples.quickstart.mapper", "com.linya.admin.dao", "com.linya.admin.ums.*.dao", "com.linya.admin.pms.*.dao"})
 public class AdminApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

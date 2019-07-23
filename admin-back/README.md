@@ -5,5 +5,3 @@
 * [mall](https://github.com/macrozheng/mall/)
 
 ## need
-JWT
-

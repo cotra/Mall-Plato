@@ -29,25 +29,19 @@ public class AuthService {
     @Autowired
     AuthDao authDao;
 
-    // 没有该账户
-    public static String ACCOUNT_HAVE_NOT = "ACCOUNT_HAVE_NOT";
-    // 账户情况异常
-    public static String ACCOUNT_ABNORMAL = "ACCOUNT_ABNORMAL";
     // 账户验证失败
     public static String ACCOUNT_FAIL = "ACCOUNT_FAIL";
     // 账户被锁定
     public static String ACCOUNT_LOCKED = "ACCOUNT_LOCKED";
 
-    /**
-     * 登录
-     */
+    // 登录
     public Cstp<String> login(LoginReq req) {
         List<UmsAdmin> list = umsAdminDao.getListByName(req.getUsername());
         if(list.size() == 0 || list == null) {
-            return Result.fail(ACCOUNT_HAVE_NOT);
+            return Result.fail(ACCOUNT_FAIL);
         }
         if(list.size() != 1) {
-            return Result.fail(ACCOUNT_ABNORMAL);
+            return Result.fail(ACCOUNT_FAIL);
         }
         UmsAdmin umsAdmin = list.get(0);
         if(umsAdmin.getStatus() == 0) {
@@ -62,13 +56,12 @@ public class AuthService {
         if(result != 1) {
             return Result.fail(ACCOUNT_FAIL);
         }
+        // 返回认证token
         String jwt = jwtTokenBo.generate(umsAdmin.getId(), umsAdmin.getUsername(), lastLoginDate);
         return Result.ok(jwt);
     }
 
-    /**
-     * 注销
-     */
+    // 注销
     public Cstp<String> logout() {
 //        Subject subject = SecurityUtils.getSubject();
 //        try {

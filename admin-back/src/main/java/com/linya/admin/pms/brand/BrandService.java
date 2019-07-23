@@ -1,23 +1,23 @@
-package com.linya.admin.ums.role;
+package com.linya.admin.pms.brand;
 
+import com.linya.admin.pms.brand.dao.BrandDao;
 import com.linya.admin.po.UmsRole;
-import com.linya.admin.ums.role.dao.RoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RoleService {
+public class BrandService {
 
     @Autowired
-    private RoleDao dao;
+    private BrandDao dao;
 
     public List<UmsRole> getList() {
-        return dao.getList();
+        return null;
     }
 
     public UmsRole find(String name) {
-        return dao.find(name);
+        return null;
     }
 }
