@@ -14,25 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = PmsApiUrl.TEST)
 public class BrandController {
+
     @Autowired
     BrandService service;
 
     @GetMapping("list")
     public Api<List<UmsRole>> list() {
-
-        List<UmsRole> list = service.getList();
-        return Sender.ok(list);
-    }
-
-    @GetMapping("add")
-    public Api<String> add() {
         return Sender.ok();
-    }
-
-
-    @GetMapping("find")
-    public Api<UmsRole> find() {
-        UmsRole role = service.find("商品管理员");
-        return Sender.ok(role);
     }
 }

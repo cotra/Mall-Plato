@@ -1,4 +1,4 @@
-package com.linya.admin.pms.brand.dao;
+package com.linya.admin.pms.brand;
 
 import com.linya.admin.po.PmsBrand;
 import org.junit.Test;
@@ -11,14 +11,14 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BrandDaoTest {
+public class BrandServiceTest {
 
     @Autowired
-    BrandDao dao;
+    BrandService service;
 
     @Test
-    public void testSelect() {
-        List<PmsBrand> userList = dao.selectList(null);
-        userList.forEach(System.out::println);
+    public void getALlList() {
+        List<PmsBrand> list = service.getALlList();
+        list.forEach(System.out::println);
     }
 }
