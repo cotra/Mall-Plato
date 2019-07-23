@@ -22,7 +22,6 @@ public class AuthController {
 
     @PostMapping("login")
     public Api<String> login(@RequestBody @Validated LoginReq req) {
-        System.out.println(req.toString());
         Cstp<String> cstp = service.login(req);
         if(cstp.isOk()) {
             return Sender.ok("登录成功", cstp.getData());

@@ -5,5 +5,5 @@ public class PmsApiUrl {
     private static final String ROOT = "/api/pms/";
 
     // 测试
-    public static final String TEST = ROOT + "test";
+    public static final String BRAND = ROOT + "brand";
 }

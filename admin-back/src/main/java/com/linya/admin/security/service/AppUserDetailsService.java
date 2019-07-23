@@ -2,13 +2,11 @@ package com.linya.admin.security.service;
 
 import com.linya.admin.bo.TokenBo;
 import com.linya.admin.dao.UmsAdminDao;
-import com.linya.admin.modules.exception.DefaultExceptionHandler;
 import com.linya.admin.po.UmsAdmin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -21,9 +19,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 public class AppUserDetailsService implements UserDetailsService {
-
-    public static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
     @Autowired
     UmsAdminDao umsAdminDao;
@@ -33,6 +30,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
+        log.info("Arrivals Request Token: " + token);
         try {
             Jws<Claims> jws = tokenBo.validate(token);
             Claims jwsBody = jws.getBody();
@@ -40,8 +38,9 @@ public class AppUserDetailsService implements UserDetailsService {
             Integer id = (Integer) jwsBody.get("id"); // id
             Date issuedAt = jwsBody.getIssuedAt(); // 签发时间
             Date expiration = jwsBody.getExpiration(); // 过期时间
-//            String audience = jwsBody.getAudience(); // 用户名
-//            LOGGER.info("用户" + " | id: " + id + " | user: " + audience + " | 签发日期: " + DateUtil.formatDateTime(issuedAt) + " | 截止日期: " + DateUtil.formatDateTime(expiration));
+            String audience = jwsBody.getAudience(); // 用户名
+
+            log.info("id/name: " + id + " | " + audience);
 
             List<UmsAdmin> list = umsAdminDao.getListById(id.longValue());
             if (list.size() == 0 || list == null || list.size() != 1) {
@@ -61,7 +60,7 @@ public class AppUserDetailsService implements UserDetailsService {
             AppUserDetails details = new AppUserDetails(token, "{noop}" + "");
             return details;
         } catch (JwtException e) {
-            LOGGER.error("jwt validate error:" + e.getMessage());
+            log.error("jwt validate error:" + e.getMessage());
             throw new BadCredentialsException("无法解析该身份凭据"); // 该错误不应在正常情况下出现
         }
     }

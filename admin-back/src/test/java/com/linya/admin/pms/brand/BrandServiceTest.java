@@ -1,5 +1,6 @@
 package com.linya.admin.pms.brand;
 
+import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.po.PmsBrand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ public class BrandServiceTest {
 
     @Test
     public void getALlList() {
-        List<PmsBrand> list = service.getALlList();
-        list.forEach(System.out::println);
+        Cstp<List<PmsBrand>> list = service.getALlList();
+        list.getData().forEach(System.out::println);
     }
 }

@@ -1,9 +1,6 @@
 package com.linya.admin.security.filter;
 
 import com.linya.admin.config.CoreConfig;
-import com.linya.admin.modules.exception.DefaultExceptionHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,15 +15,12 @@ import java.io.IOException;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-    public static Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
-
     @Autowired
     CoreConfig coreConfig;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
         String header = req.getHeader(coreConfig.getJWT_HEADER());
-        LOGGER.info("Arrivals Request Token: " + header);
         if (header != null && !header.isEmpty()) {
             // 设置对比项
             SecurityContext context = SecurityContextHolder.getContext();

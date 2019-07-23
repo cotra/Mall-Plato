@@ -1,5 +1,6 @@
 package com.linya.admin.security;
 
+import com.linya.admin.pms.PmsApiUrl;
 import com.linya.admin.security.filter.TokenAuthenticationFilter;
 import com.linya.admin.security.handler.AppAccessDeniedHandler;
 import com.linya.admin.security.point.AppAuthenticationEntryPoint;
@@ -65,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 自定义
         HttpSecurity role = custom.exceptionHandling().authenticationEntryPoint(appAuthenticationEntryPoint()).accessDeniedHandler(appAccessDeniedHandler()).and();
         // 规则
-        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().antMatchers(UmsApiUrl.ROLE + "/**").authenticated();
+        role.authorizeRequests().antMatchers(UmsApiUrl.AUTH + "/**").permitAll().antMatchers(UmsApiUrl.ROLE + "/**", PmsApiUrl.BRAND + "/**").authenticated();
     }
 
     public void configure(WebSecurity web) throws Exception {
