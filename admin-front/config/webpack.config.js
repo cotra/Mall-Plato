@@ -1,3 +1,4 @@
+// eslint-disable-next-line strict
 'use strict';
 
 const fs = require('fs');
@@ -42,6 +43,9 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+// 添加less
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -69,7 +73,8 @@ module.exports = function(webpackEnv) {
   const env = getClientEnvironment(publicUrl);
 
   // common function to get style loaders
-  const getStyleLoaders = (cssOptions, preProcessor) => {
+  // 添加preProcessorOptions
+  const getStyleLoaders = (cssOptions, preProcessor, preProcessorOptions) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -109,9 +114,12 @@ module.exports = function(webpackEnv) {
     if (preProcessor) {
       loaders.push({
         loader: require.resolve(preProcessor),
-        options: {
-          sourceMap: isEnvProduction && shouldUseSourceMap,
-        },
+        options: Object.assign(
+          {
+            sourceMap: isEnvProduction && shouldUseSourceMap,
+          },
+          preProcessorOptions ? preProcessorOptions : {} 
+        ) ,
       });
     }
     return loaders;
@@ -343,6 +351,13 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
+                  [
+                    'import', {
+                      libraryName: 'antd',
+                      libraryDirectory: 'es',
+                      style: 'css'
+                    }
+                  ],
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
