@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Button, Select } from "antd";
+import { Button } from "antd";
 
 const App: React.FC = () => {
   return (

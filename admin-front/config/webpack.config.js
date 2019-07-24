@@ -29,6 +29,8 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
+const lessToJs = require('less-vars-to-js');
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -46,6 +48,14 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // 添加less
 const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
+
+// 添加主题
+const theme = lessToJs(fs.readFileSync(paths.appSrc + '/theme/v1.less', 'utf8'),
+  {
+    resolveVariables: true,
+    stripPrefix: true
+  }); 
+
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -355,7 +365,7 @@ module.exports = function(webpackEnv) {
                     'import', {
                       libraryName: 'antd',
                       libraryDirectory: 'es',
-                      style: 'css'
+                      style: true
                     }
                   ],
                   [
@@ -467,6 +477,49 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            // 添加less
+            // Opt-in support for LESS (using .less extensions).
+            // By default we support LESS Modules with the
+            // extensions .module.less
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader',
+                {
+                  javascriptEnabled: true,
+                  modifyVars: theme,
+                }
+              ),
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using LESS
+            // using the extension .module.less
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+                'less-loader',
+                {
+                  javascriptEnabled: true,
+                  modifyVars: theme,
+                }
+              ),
+            },
+            // 添加less end
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
