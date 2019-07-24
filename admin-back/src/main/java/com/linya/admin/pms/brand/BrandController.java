@@ -19,8 +19,8 @@ public class BrandController {
     @Autowired
     BrandService service;
 
-    @GetMapping("list")
-    public Api<List<PmsBrand>> list() {
+    @GetMapping("all")
+    public Api<List<PmsBrand>> all() {
         Cstp<List<PmsBrand>> cstp = service.getALlList();
         return Sender.ok(cstp.getData());
     }
