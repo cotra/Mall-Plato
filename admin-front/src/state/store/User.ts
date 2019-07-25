@@ -54,7 +54,7 @@ class User implements IUser {
   }
   // computed
   @computed get isLogin() {
-    return this.account.id > 0;
+    return this.account.token !== "";
   }
 }
 

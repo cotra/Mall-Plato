@@ -1,24 +1,18 @@
-import { string } from "prop-types";
-
 /**
  * @Date 2019-05-25 13:34:04
  * @Remark 账户
  */
 
-// model
+import { IDataLogin } from "api/ums/authorize/login";
 
-export interface IAccount {
-  nickname: string;
-  avatar: string;
-  email: string;
-  token: string;
-  loginTime: string;
-}
+export type IAccount = IDataLogin;
 
 export const BLANK_ACCOUNT: IAccount = {
-  nickname: "",
+  username: "",
   avatar: "",
+  mobile: "",
   email: "",
-  token: "",
-  loginTime: ""
+  nickname: "",
+  loginTime: "",
+  token: ""
 };

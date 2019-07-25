@@ -19,4 +19,15 @@ export interface IReqLogin {
 }
 
 // res
-export type IResLogin = IRes<string>;
+export type IResLogin = IRes<IDataLogin>;
+
+// data
+export interface IDataLogin {
+  username: string;
+  avatar: string;
+  mobile: string;
+  email: string;
+  nickname: string;
+  loginTime: string;
+  token: string;
+}

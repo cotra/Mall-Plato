@@ -7,10 +7,12 @@
 // config
 // script & methods & public
 import toast from "public/toast";
+import logUtils from "utils/logUtils";
 // store
 import { state } from "./state";
+import accountSAO from "state/sao/account.sao";
 // service
-import { loginService, getMyInfoService } from "./service";
+import { loginService } from "./service";
 // interface && type
 import { IReqLogin } from "api/ums/authorize/login";
 // 其它
@@ -39,25 +41,11 @@ export async function login(form: IForm) {
   state.loadingSetter(false);
   // 成功
   if (result.payload) {
-    state.loadingSetter(true);
-    const info = await getMyInfoService(params);
-    state.loadingSetter(false);
-    if (info.payload) {
-      // 设置可以访问的菜单
-      // setAdminMenu(info.payload.accessMenu);
-      // // 获取拓展信息
-      // state.loadingSetter(true);
-      // const infoExtend = await getMyInfoExtendService(info.payload);
-      // state.loadingSetter(false);
-      // if (infoExtend.payload) {
-      //   // 设置账户信息跳转
-      //   log.info(infoExtend.payload, "登录账户");
-      //   accountSAO.accountSetter(infoExtend.payload);
-      // }
-      // toast.whenFailOrErr(infoExtend);
-    }
+    logUtils.info(result.payload, "登录账户");
+    accountSAO.accountSetter(result.payload);
+    // 设置可以访问的菜单
+    // setAdminMenu(info.payload.accessMenu);
     // 失败和异常
-    toast.whenFailOrErr(info);
   }
   // 失败和异常
   toast.whenFailOrErr(result);

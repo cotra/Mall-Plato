@@ -22,6 +22,7 @@ import {
 // store
 import { observer } from "mobx-react";
 import { state } from "./state";
+import accountSAO from "state/sao/account.sao";
 // controller
 import { IForm, login } from "./controller";
 // interface && type
@@ -39,12 +40,12 @@ class Login extends Component<FormComponentProps> {
     // props && state
     const { getFieldDecorator } = this.props.form;
 
-    // const account = accountSAO.accountGetter();
-    // const isLogin = accountSAO.isLogin();
+    const account = accountSAO.accountGetter();
+    const isLogin = accountSAO.isLogin();
 
-    // if (isLogin) {
-    //   return <Redirect to="/admin" />;
-    // }
+    if (isLogin) {
+      return <Redirect to="/admin" />;
+    }
     return (
       <Spin size="large" spinning={state.loading} delay={50}>
         <Layout className={le.view}>
@@ -53,7 +54,7 @@ class Login extends Component<FormComponentProps> {
             <Form>
               <FormItem>
                 {getFieldDecorator("user", {
-                  initialValue: "",
+                  initialValue: account.username,
                   rules: [INPUT_REQUIRED_RULE, NAME_LENGTH_RULE]
                 })(
                   <Input
