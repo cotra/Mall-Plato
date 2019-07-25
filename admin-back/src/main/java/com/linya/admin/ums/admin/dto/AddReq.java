@@ -9,9 +9,7 @@ public class AddReq implements Serializable {
     @NotBlank(message = "账户密码不能为空")
     private String password;
     @NotBlank(message = "账户昵称不能为空")
-    private String nickName;
-    @NotBlank(message = "备注不能为空")
-    private String note;
+    private String nickname;
 
     private static final long serialVersionUID = 1L;
 
@@ -31,20 +29,12 @@ public class AddReq implements Serializable {
         this.password = password;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override
@@ -55,8 +45,7 @@ public class AddReq implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", nickName=").append(nickName);
-        sb.append(", note=").append(note);
+        sb.append(", nickName=").append(nickname);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

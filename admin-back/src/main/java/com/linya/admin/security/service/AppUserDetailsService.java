@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Date;
-import java.util.List;
 
 @Slf4j
 public class AppUserDetailsService implements UserDetailsService {
@@ -42,12 +41,11 @@ public class AppUserDetailsService implements UserDetailsService {
 
             log.info("id/name: " + id + " | " + audience);
 
-            List<UmsAdmin> list = umsAdminDao.getListById(id.longValue());
-            if (list.size() == 0 || list == null || list.size() != 1) {
+            // 要验证的用户和内容
+            UmsAdmin admin = umsAdminDao.selectById(id);
+            if(admin == null) {
                 throw new BadCredentialsException("用户名或密码错误");
             }
-            // 要验证的用户和内容
-            UmsAdmin admin = list.get(0);
             if (admin.getStatus() == 0) {
                 throw new LockedException("该用户已被锁定");
             }

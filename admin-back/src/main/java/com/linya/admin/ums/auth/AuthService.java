@@ -1,5 +1,6 @@
 package com.linya.admin.ums.auth;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.linya.admin.bo.AuthBo;
 import com.linya.admin.bo.TokenBo;
 import com.linya.admin.dao.UmsAdminDao;
@@ -8,6 +9,7 @@ import com.linya.admin.modules.cstp.Result;
 import com.linya.admin.po.UmsAdmin;
 import com.linya.admin.ums.auth.dao.AuthDao;
 import com.linya.admin.ums.auth.dto.LoginReq;
+import com.linya.admin.ums.auth.dto.LoginRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +23,13 @@ public class AuthService {
     TokenBo jwtTokenBo;
 
     @Autowired
-    UmsAdminDao umsAdminDao;
-
-    @Autowired
     AuthBo authBo;
 
     @Autowired
     AuthDao authDao;
+
+    @Autowired
+    UmsAdminDao umsAdminDao;
 
     // 账户验证失败
     public static String ACCOUNT_FAIL = "ACCOUNT_FAIL";
@@ -35,8 +37,8 @@ public class AuthService {
     public static String ACCOUNT_LOCKED = "ACCOUNT_LOCKED";
 
     // 登录
-    public Cstp<String> login(LoginReq req) {
-        List<UmsAdmin> list = umsAdminDao.getListByName(req.getUsername());
+    public Cstp<LoginRes> login(LoginReq req) {
+        List<UmsAdmin> list = authDao.getListByName(req.getUsername());
         if(list.size() == 0 || list == null) {
             return Result.fail(ACCOUNT_FAIL);
         }
@@ -56,9 +58,15 @@ public class AuthService {
         if(result != 1) {
             return Result.fail(ACCOUNT_FAIL);
         }
+        UmsAdmin admin = umsAdminDao.selectById(umsAdmin.getId());
+
         // 返回认证token
         String jwt = jwtTokenBo.generate(umsAdmin.getId(), umsAdmin.getUsername(), lastLoginDate);
-        return Result.ok(jwt);
+
+        LoginRes res = new LoginRes();
+        BeanUtil.copyProperties(admin, res);
+        res.setToken(jwt);
+        return Result.ok(res);
     }
 
     // 注销

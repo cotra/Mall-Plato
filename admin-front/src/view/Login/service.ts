@@ -22,13 +22,11 @@ export async function loginService(params: IReqLogin) {
   // 打开接口
   const a1 = await open<IReqLogin, IResLogin>(API_LOGIN, params);
   // 创建返回数据
-  const data: IData<boolean> = bag<boolean>([a1]);
+  const data = bag<string>([a1]);
   // 成功后处理
   if (isOkRes(a1)) {
-    data.payload = true;
+    data.payload = a1.data;
   }
-  // 特殊处理
-
   // 返回
   return data;
 }

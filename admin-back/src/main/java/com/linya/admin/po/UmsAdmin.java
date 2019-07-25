@@ -10,13 +10,13 @@ public class UmsAdmin implements Serializable {
 
     private String password;
 
-    private String icon;
+    private String avatar;
+
+    private String mobile;
 
     private String email;
 
-    private String nickName;
-
-    private String note;
+    private String nickname;
 
     private Date createTime;
 
@@ -50,12 +50,20 @@ public class UmsAdmin implements Serializable {
         this.password = password;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {
@@ -66,20 +74,12 @@ public class UmsAdmin implements Serializable {
         this.email = email;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Date getCreateTime() {
@@ -115,10 +115,10 @@ public class UmsAdmin implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
-        sb.append(", icon=").append(icon);
+        sb.append(", avatar=").append(avatar);
+        sb.append(", mobile=").append(mobile);
         sb.append(", email=").append(email);
-        sb.append(", nickName=").append(nickName);
-        sb.append(", note=").append(note);
+        sb.append(", nickname=").append(nickname);
         sb.append(", createTime=").append(createTime);
         sb.append(", loginTime=").append(loginTime);
         sb.append(", status=").append(status);

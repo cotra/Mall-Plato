@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface AdminDao {
 
-    @Insert("insert into ums_admin(username,password,nick_name,note,create_time) values(#{admin.username},#{admin.password},#{admin.nickName},#{admin.note},#{admin.createTime})")
+    @Insert("insert into ums_admin(username,password,nickname,create_time) values(#{admin.username},#{admin.password},#{admin.nickname},#{admin.createTime})")
     @Options(useGeneratedKeys=true, keyProperty="admin.id")
     public int add(@Param("admin")UmsAdmin admin);
 }

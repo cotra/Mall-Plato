@@ -19,8 +19,6 @@ public class AdminDaoTest {
         UmsAdmin admin = new UmsAdmin();
         admin.setUsername("test");
         admin.setPassword("123");
-        admin.setIcon("123");
-        admin.setNickName("123445534");
         admin.setCreateTime(DateUtil.date());
         int add = dao.add(admin);
         System.out.println(admin.getId());
