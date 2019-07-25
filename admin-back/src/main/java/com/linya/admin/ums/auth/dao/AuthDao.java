@@ -13,6 +13,6 @@ public interface AuthDao {
     @Update("UPDATE ums_admin SET login_time=#{time} WHERE id=#{id}")
     int updateLoginTime(@Param("id") Long id, @Param("time") Date time);
 
-    @Select("SELECT id,password,status FROM ums_admin WHERE username=#{username}")
+    @Select("SELECT id,username,password,status FROM ums_admin WHERE username=#{username}")
     List<UmsAdmin> getListByName(@Param("username") String name);
 }
