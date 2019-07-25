@@ -1,5 +1,4 @@
 /**
- * @Title
  * @Date 2019-07-24 11:57:17
  * @Remark
  */
@@ -12,7 +11,7 @@ class Admin extends Component {
     // props && state
 
     return (
-      <div>login</div>
+      <div>admin</div>
     );
   }
 }
