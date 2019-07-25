@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.content-container {
+  margin: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-container {
+  margin: 30px 20px 0;
+}
+
+.search-row {
+  margin-bottom: 10px;
+
+  .ant-calendar-picker {
+    width: 100%;
+  }
+  @media (min-width: 800px) {
+    .ant-form-item {
+      display: flex !important;
+    }
+    // 普通搜索输入框占100%
+    .ant-form-item-control-wrapper {
+      flex: 1 1 auto;
+    }
+  }
+}
+
+.search-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-simpelBtn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+.action-container {
+  margin: 30px 20px 15px;
+}
+
+.table-container {
+  margin: 0 20px 30px;
+}
+
+.netscapte-table {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+// modal
+.modal-container {
+  margin-right: 70px;
+  min-height: 200px;
+}
+.modal-container-full {
+  min-height: 200px;
+}
+.modal-transfer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-form {
+  .ant-radio-group, .ant-calendar-picker {
+    width: 100%;
+  }
+}
