@@ -122,7 +122,7 @@ class AdminHeader extends Component<IProps> {
     confirm({
       title: "清除本地数据的同时会退出系统",
       onOk() {
-        exit(true);
+        exit();
       }
     });
   };
@@ -135,12 +135,14 @@ class AdminHeader extends Component<IProps> {
     confirm({
       title: `注销${account.username}退出系统?`,
       onOk() {
-        exit(false);
+        exit();
       }
     });
   };
-  private exit = (flag: boolean) => {
-    // logout(flag);
+  private exit = () => {
+    accountSAO.accountValueSetter({
+      token: ""
+    });
   };
 }
 

@@ -11,11 +11,13 @@ import logUtils from "utils/logUtils";
 // store
 import { state } from "./state";
 import accountSAO from "state/sao/account.sao";
+import userSAO from "state/sao/user.sao";
 // service
 import { loginService } from "./service";
 // interface && type
 import { IReqLogin } from "api/ums/authorize/login";
 // 其它
+import { menus } from "routes/menus";
 
 // 表单字段
 export interface IForm {
@@ -44,7 +46,7 @@ export async function login(form: IForm) {
     logUtils.info(result.payload, "登录账户");
     accountSAO.accountSetter(result.payload);
     // 设置可以访问的菜单
-    // setAdminMenu(info.payload.accessMenu);
+    userSAO.menuSetter(menus);
     // 失败和异常
   }
   // 失败和异常
