@@ -8,10 +8,10 @@
 // script & methods & public
 // http
 import { IData } from "http/model";
-import { open, bag, isOkRes, formatResData } from "http/v1";
+import { open, bag, isOkRes } from "http/v1";
 // api
-import { API_LOGIN, IReqLogin, IResLogin } from "api/authorize/login";
-import { IResMyInfo, API_MY_INFO } from "api/authorize/info";
+import { API_LOGIN, IReqLogin, IResLogin } from "api/ums/authorize/login";
+import { API_MY_INFO } from "api/ums/authorize/info";
 // interface && type && class
 import { IAccount } from "model/account";
 // 其它
@@ -37,15 +37,13 @@ export async function loginService(params: IReqLogin) {
 export async function getMyInfoService(params: IReqLogin) {
   // 开始前
   // 打开接口
-  const a1 = await open<{}, IResMyInfo>(API_MY_INFO, {});
+  const a1 = await open<{}, any>(API_MY_INFO, {});
   // 创建返回数据
   const data = bag<IAccount>([a1]);
   // 成功后处理
   if (isOkRes(a1)) {
-    const a1Format = formatResData<any>(a1.data);
-    if (a1Format) {
-      // data.payload = createAccount(a1Format, params);
-    }
+    // const a1Format = formatResData<any>(a1.data);
+    // data.payload = createAccount(a1Format, params);
   }
   // 特殊处理
 

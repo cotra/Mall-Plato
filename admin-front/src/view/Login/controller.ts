@@ -10,18 +10,15 @@ import toast from "public/toast";
 // store
 import { state } from "./state";
 // service
-import {
-  loginService,
-  getMyInfoService
-} from "./service";
+import { loginService, getMyInfoService } from "./service";
 // interface && type
-import { IReqLogin } from "api/authorize/login";
+import { IReqLogin } from "api/ums/authorize/login";
 // 其它
 
 // 表单字段
 export interface IForm {
+  user: string;
   key: string;
-  pwd: string;
 }
 
 // state
@@ -31,8 +28,8 @@ export interface IState {
 
 export async function login(form: IForm) {
   const params: IReqLogin = {
-    userName: form.key.trim(),
-    password: form.pwd.trim()
+    username: form.user.trim(),
+    key: form.key.trim()
   };
   // 开始前
   state.loadingSetter(true);

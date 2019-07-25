@@ -7,7 +7,7 @@
 import React from "react";
 // lib
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect

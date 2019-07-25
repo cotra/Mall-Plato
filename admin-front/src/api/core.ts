@@ -1,5 +1,4 @@
 /**
- * @Title http
  * @Date 2019-05-27 16:47:09
  * @Remark
  */
@@ -13,9 +12,12 @@ export interface IApi {
 }
 
 // res
-export interface IRes {
-  result: number | string;
-  msg?: string;
-  code?: number;
-  message?: string;
+export interface IRes<T> {
+  code: string | number;
+  msg: string;
+  data: T;
 }
+
+export type IResItem = IRes<any>;
+export type IResList = IResItem[];
+export type IResError = IRes<null>;

@@ -31,8 +31,7 @@ export const openOption: IOpenOption = {
   static: false
 };
 
-export const CODE_NOT_LOGIN = -1; // 没有登录
-export const CODE_SUCCESS = "1999"; // 成功返回
+export const CODE_SUCCESS = "1000"; // 成功返回
 // http成功返回
 export const httpOkCode = 200;
 

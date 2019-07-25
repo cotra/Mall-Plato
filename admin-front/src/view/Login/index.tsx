@@ -52,7 +52,7 @@ class Login extends Component<FormComponentProps> {
             <h1 className={le.logo}>MCMS {APP_VERSION}</h1>
             <Form>
               <FormItem>
-                {getFieldDecorator("key", {
+                {getFieldDecorator("user", {
                   initialValue: "",
                   rules: [INPUT_REQUIRED_RULE, NAME_LENGTH_RULE]
                 })(
@@ -64,7 +64,7 @@ class Login extends Component<FormComponentProps> {
                 )}
               </FormItem>
               <FormItem>
-                {getFieldDecorator("pwd", {
+                {getFieldDecorator("key", {
                   initialValue: "",
                   rules: [INPUT_REQUIRED_RULE, PWD_LENGTH_RULE]
                 })(

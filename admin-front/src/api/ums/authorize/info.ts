@@ -1,10 +1,9 @@
 /**
- * @Title api
  * @Date 2019-05-28 10:40:15
  * @Remark
  */
 
-import { IApi, IRes } from "api/core";
+import { IApi } from "api/core";
 
 export const API_MY_INFO: IApi = {
   title: "当前用户信息",
@@ -17,6 +16,3 @@ export const API_MY_INFO: IApi = {
 // none
 
 // res
-export interface IResMyInfo extends IRes {
-  data: any;
-}

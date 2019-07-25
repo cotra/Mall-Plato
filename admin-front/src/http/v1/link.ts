@@ -10,17 +10,17 @@ import { AxiosError, AxiosResponse } from "axios";
 import { setUrlWithParams, createInstance } from "../core";
 // 其它
 import { BLANK_RESPONSE, IOpenOption } from "../model";
-import { IRes } from "api/core";
+import { IResError } from "api/core";
 
 /* get方法 */
-export function get<T, D extends IRes>(
+export function get<T, D>(
   url: string,
   payload: T,
   option: IOpenOption
-): Promise<D | IRes> {
+): Promise<D | IResError> {
   // 请求路径处理参数
   const path: string = setUrlWithParams(url, payload, option.fresh);
-  
+
   // 请求实例
   return createInstance(option)
     .get(path)
@@ -29,20 +29,21 @@ export function get<T, D extends IRes>(
     })
     .catch((error: AxiosError) => {
       const res: AxiosResponse<null> = error.response || BLANK_RESPONSE;
-      const result: IRes = {
-        result: res.status,
-        msg: ""
+      const result: IResError = {
+        code: res.status,
+        msg: "",
+        data: null
       };
       return result;
     });
 }
 
 /* POST方法 */
-export function post<T, D extends IRes>(
+export function post<T, D>(
   url: string,
   payload: T,
   option: IOpenOption
-): Promise<D | IRes> {
+): Promise<D | IResError> {
   // 请求路径
   const path: string = url;
 
@@ -54,9 +55,10 @@ export function post<T, D extends IRes>(
     })
     .catch((error: AxiosError) => {
       const res: AxiosResponse<null> = error.response || BLANK_RESPONSE;
-      const result: IRes = {
-        result: res.status,
-        msg: ""
+      const result: IResError = {
+        code: res.status,
+        msg: "",
+        data: null
       };
       return result;
     });
