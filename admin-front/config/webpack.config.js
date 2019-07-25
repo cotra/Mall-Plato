@@ -30,6 +30,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const postcssNormalize = require('postcss-normalize');
 
 const lessToJs = require('less-vars-to-js');
+const aliyunTheme = require('@ant-design/aliyun-theme');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -48,11 +49,16 @@ const lessRegex = /\.less$/;
 const lessModuleRegex = /\.module\.less$/;
 
 // 添加主题
-const theme = lessToJs(fs.readFileSync(paths.appSrc + '/styles/theme.less', 'utf8'),
+const lessTheme = lessToJs(fs.readFileSync(paths.appSrc + '/styles/theme.less', 'utf8'),
   {
     resolveVariables: true,
     stripPrefix: true
-  }); 
+  });
+
+const theme = {
+  ...aliyunTheme.default,
+  ...lessTheme
+};
 
 
 // This is the production and development configuration.

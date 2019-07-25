@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@ant-design/aliyun-theme@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/@ant-design/aliyun-theme/-/aliyun-theme-0.0.3.tgz#b7435cef1b1165d1eab555f06c1dffa35b5a0b48"
+  integrity sha512-vapr9hijhAZmzeUl4uKWK6057cilJ5Ijnp/fuTbi4Hw8/FKUoqHoOhJYBiPGk9FX9hBo92MY0wmwVcHtvTgOkw==
+
 "@ant-design/colors@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npmjs.org/@ant-design/colors/-/colors-3.1.0.tgz#b7e2cc61a4e86d3d109494034acfb1222dacaa3c"
