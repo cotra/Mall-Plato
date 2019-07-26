@@ -9,6 +9,7 @@ import com.linya.admin.pms.PmsApiUrl;
 import com.linya.admin.pms.brand.dto.BrandListReq;
 import com.linya.admin.po.PmsBrand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public class BrandController {
     BrandService service;
 
     @PostMapping("list")
+    @Cacheable(value="user-key")
     public Api<ResPageList<PmsBrand>> list(@RequestBody @Validated BrandListReq req) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtil.copyProperties(req, pmsBrand);
