@@ -10,6 +10,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public Api<String> index() {
-        return Sender.ok("mall-prototype admin-back api service is running.");
+        return Sender.ok("Mall-Plato admin-back api service is running.");
     }
 }
