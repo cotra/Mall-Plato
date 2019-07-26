@@ -1,4 +1,4 @@
-package com.linya.admin;
+package com.linya.admin.bootstrap;
 
 import com.linya.admin.modules.api.Api;
 import com.linya.admin.modules.api.Sender;

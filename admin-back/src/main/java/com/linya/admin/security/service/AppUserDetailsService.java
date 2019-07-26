@@ -39,7 +39,7 @@ public class AppUserDetailsService implements UserDetailsService {
             Date expiration = jwsBody.getExpiration(); // 过期时间
             String audience = jwsBody.getAudience(); // 用户名
 
-            log.info("id/name: " + id + " | " + audience);
+            log.info("token用户: " + id + " | " + audience);
 
             // 要验证的用户和内容
             UmsAdmin admin = umsAdminDao.selectById(id);

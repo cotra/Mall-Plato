@@ -24,7 +24,7 @@ public class BrandController {
     BrandService service;
 
     @PostMapping("list")
-    @Cacheable(value="user-key")
+    @Cacheable(value="brand-list")
     public Api<ResPageList<PmsBrand>> list(@RequestBody @Validated BrandListReq req) {
         PmsBrand pmsBrand = new PmsBrand();
         BeanUtil.copyProperties(req, pmsBrand);
