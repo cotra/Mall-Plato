@@ -11,4 +11,6 @@ public class BrandListReq implements Serializable {
     private long size;
     @NotNull(message = "页数不能为空")
     private long page;
+    @NotNull(message = "添加name参数")
+    private String name;
 }
