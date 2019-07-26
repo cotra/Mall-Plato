@@ -1,4 +1,4 @@
-package com.linya.admin.center.mall;
+package com.linya.admin.center.mail;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class MallCenter {
+public class MailCenter {
 
     @Autowired
     private JavaMailSender mailSender;
 
     public void sendSimpleMail(String to, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("mr03web@qq.com");
+        message.setFrom("xxx@qq.com");
         message.setTo(to);
         message.setSubject(subject);
         message.setText(content);

@@ -12,6 +12,8 @@ logging:
 #  file: log/run.log
 # Spring
 spring:
+  application:
+    name: Mall-Plato
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -28,6 +30,11 @@ spring:
     host: 127.0.0.1
     port: 6379
     password:
+  mail:
+    host: smtp.qq.com
+    username: xxx@qq.com
+    password: xxxxxx
+    default: encoding=UTF-8
 # MyBatis
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
