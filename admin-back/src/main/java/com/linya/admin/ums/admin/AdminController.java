@@ -1,7 +1,7 @@
 package com.linya.admin.ums.admin;
 
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Sender;
+import com.linya.admin.modules.api.Letter;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.ums.UmsApiUrl;
 import com.linya.admin.ums.admin.dto.AddReq;
@@ -23,9 +23,9 @@ public class AdminController {
     public Api<Long> add(@RequestBody @Validated AddReq req) {
         Cstp<Long> cstp = service.add(req);
         if(cstp.isOk()) {
-            return Sender.ok("添加管理员成功", cstp.getData());
+            return Letter.ok("添加管理员成功", cstp.getData());
         } else {
-            return Sender.fail("添加管理员失败", null);
+            return Letter.fail("添加管理员失败", null);
         }
     }
 }

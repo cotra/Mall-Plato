@@ -3,7 +3,7 @@ package com.linya.admin.security.point;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Sender;
+import com.linya.admin.modules.api.Letter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -22,7 +22,7 @@ public class AppAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest req, HttpServletResponse res, AuthenticationException e) throws IOException, ServletException {
         LOGGER.warn("AuthenticationEntryPoint: " + e.getMessage());
 
-        Api<String> api = Sender.fail("token认证未通过", e.getMessage());
+        Api<String> api = Letter.fail("token认证未通过", e.getMessage());
         JSON parse = JSONUtil.parse(api);
 
         res.setContentType("application/json");

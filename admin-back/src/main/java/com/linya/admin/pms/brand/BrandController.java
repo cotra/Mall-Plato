@@ -3,7 +3,7 @@ package com.linya.admin.pms.brand;
 import cn.hutool.core.bean.BeanUtil;
 import com.linya.admin.dto.ResPageList;
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Sender;
+import com.linya.admin.modules.api.Letter;
 import com.linya.admin.modules.cstp.Cstp;
 import com.linya.admin.pms.PmsApiUrl;
 import com.linya.admin.pms.brand.dto.BrandListReq;
@@ -30,6 +30,8 @@ public class BrandController {
         BeanUtil.copyProperties(req, pmsBrand);
 
         Cstp<ResPageList<PmsBrand>> cstp = service.getPageList(req.getSize(), req.getPage(), pmsBrand);
-        return Sender.ok(cstp.getData());
+        return Letter.ok(cstp.getData());
     }
+
+
 }

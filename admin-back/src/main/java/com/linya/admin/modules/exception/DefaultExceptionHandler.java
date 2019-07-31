@@ -1,7 +1,7 @@
 package com.linya.admin.modules.exception;
 
 import com.linya.admin.modules.api.Api;
-import com.linya.admin.modules.api.Sender;
+import com.linya.admin.modules.api.Letter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -20,7 +20,7 @@ public class DefaultExceptionHandler {
     public Api<String> requestNotValid(MethodArgumentNotValidException ex) {
         // 按需重新封装需要返回的错误信息
         String message = ex.getBindingResult().getFieldError().getDefaultMessage();
-        return Sender.fail(message);
+        return Letter.fail(message);
     }
 
     /**
@@ -30,7 +30,7 @@ public class DefaultExceptionHandler {
     public Api<String> requestNotReadable(HttpMessageNotReadableException ex) {
         String message = ex.getMessage();
         log.warn("参数格式不合法", message);
-        return Sender.fail("参数格式不合法", message);
+        return Letter.fail("参数格式不合法", message);
     }
 
     /**
@@ -38,6 +38,6 @@ public class DefaultExceptionHandler {
      */
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public Api<String> request405(HttpRequestMethodNotSupportedException ex) {
-        return Sender.fail("接口不支持该请求方法", null);
+        return Letter.fail("接口不支持该请求方法", null);
     }
 }
